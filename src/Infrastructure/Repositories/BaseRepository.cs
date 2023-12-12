@@ -58,5 +58,14 @@ namespace Infrastructure.Repositories
         {
             return await DbSet.AnyAsync(predicate);
         }
+
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await DbSet.CountAsync(predicate);
+        }
+        public int Count(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.Count(predicate);
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Application.UseCases.NewBoard;
+﻿using Application.Response;
+using Application.UseCases.GetBoards;
+using Application.UseCases.NewBoard;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.UseCases.V1.Board.NewBoard
+namespace Api.UseCases.V1.Board.GetBoards
 {
     [ApiVersion("1.0")]
     [ApiController]
@@ -15,12 +17,12 @@ namespace Api.UseCases.V1.Board.NewBoard
             _mediator = mediator;
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NewBoardResponse))]
-        public async Task<IActionResult> Post([FromBody] NewBoardRequest request)
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponsePagination<GetBoardsResponse>))]
+        public async Task<IActionResult> Get([FromQuery] GetBoardsRequest request)
         {
             var response = await _mediator.Send(request);
-            return StatusCode(StatusCodes.Status201Created, response);
+            return Ok(response);
         }
     }
 }

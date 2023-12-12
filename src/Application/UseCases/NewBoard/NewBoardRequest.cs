@@ -2,7 +2,7 @@
 
 namespace Application.UseCases.NewBoard
 {
-    public class NewBoardRequest : IRequest<Unit>
+    public class NewBoardRequest : IRequest<NewBoardResponse>
     {
         public required string Name { get; set; }
         public string? Description { get; set; }

@@ -1,18 +1,10 @@
 ﻿namespace Application.UseCases.NewBoard
 {
-    public class NewBoardResponse
+    public class NewBoardResponse(Domain.Entities.Board board)
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string? Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-
-        public NewBoardResponse(Domain.Entities.Board board)
-        {
-            Id = board.Id;
-            Name = board.Name;
-            Description = board.Description;
-            CreatedAt = board.CreatedAt;
-        }
+        public int Id { get; set; } = board.Id;
+        public string Name { get; set; } = board.Name;
+        public string? Description { get; set; } = board.Description;
+        public DateTime CreatedAt { get; set; } = board.CreatedAt;
     }
 }

@@ -27,5 +27,31 @@ namespace Infrastructure.Context
             configurationBuilder.Properties<string>().HaveColumnType("varchar(100)");
             configurationBuilder.Properties(typeof(Enum)).HaveConversion<string>().HaveColumnType("varchar(50)");
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            FormatEntity();
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override int SaveChanges()
+        {
+            FormatEntity();
+            return base.SaveChanges();
+        }
+
+        private void FormatEntity()
+        {
+            var entities = ChangeTracker.Entries()
+                .Where(entity => entity is { Entity: BaseEntity, State: EntityState.Added or EntityState.Modified });
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                    (entity.Entity as BaseEntity)?.CreateAtNow();
+                else if (entity.State == EntityState.Modified)
+                    (entity.Entity as BaseEntity)?.UpdateAtNow();
+            }
+        }
     }
 }

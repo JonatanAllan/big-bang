@@ -13,5 +13,7 @@ namespace Domain.Interfaces.Repositories
         Task DeleteAsync(TEntity entity);
         Task<bool> ExistsAsync(int id);
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
+        int Count(Expression<Func<TEntity, bool>> predicate);
     }
 }
