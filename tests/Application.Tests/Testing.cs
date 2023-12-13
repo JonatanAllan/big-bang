@@ -1,5 +1,5 @@
-﻿using Application.Tests.Core.Fixture;
-using Infrastructure.Context;
+﻿using Application.Tests.Core.Tests;
+using Data.Context;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,7 +42,7 @@ namespace Application.Tests
         {
             using var scope = _scopeFactory.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            context.Add(entities);
+            context.AddRange(entities);
             await context.SaveChangesAsync();
         }
 

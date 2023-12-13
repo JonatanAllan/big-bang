@@ -1,5 +1,6 @@
 using System.Reflection;
 using Api.Extensions;
+using Api.Infrastructure;
 using Api.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -39,11 +40,13 @@ public class Startup
             options.OperationFilter<SwaggerDefaultValues>();
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.DocumentFilter<PathLowercaseDocumentFilter>();
             options.IncludeXmlComments(xmlPath);
         });
 
         services.AddCustomSqlServer(_configuration);
         services.AddUseCases();
+        services.AddExceptionHandler<CustomExceptionHandler>();
     }
 
     public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider, IWebHostEnvironment environment)
@@ -61,6 +64,7 @@ public class Startup
                 options.SwaggerEndpoint(url, name);
             }
         });
+        app.UseExceptionHandler(_ => { });
         app.UseRouting();
 
         app.UseCors(ops => ops.AllowAnyMethod()

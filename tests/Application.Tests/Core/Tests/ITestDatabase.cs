@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-
-namespace Application.Tests.Core.Fixture
+﻿namespace Application.Tests.Core.Tests
 {
     public interface ITestDatabase
     {

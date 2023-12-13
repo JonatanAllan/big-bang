@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using System.Data.Common;
 using Api;
-using Infrastructure.Context;
+using Data.Context;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Application.Tests.Core.Fixture
+namespace Application.Tests.Core.Tests
 {
-    public class CustomWebApplicationFactory() : WebApplicationFactory<Program>
+    public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

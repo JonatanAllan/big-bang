@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Data.Context;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
-using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories
+namespace Data.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {

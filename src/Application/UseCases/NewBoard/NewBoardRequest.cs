@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 
 namespace Application.UseCases.NewBoard
 {
@@ -8,5 +9,18 @@ namespace Application.UseCases.NewBoard
         public string? Description { get; set; }
 
         public Domain.Entities.Board ToEntity() => new(Name, Description);
+    }
+
+    public class NewBoardRequestValidator : AbstractValidator<NewBoardRequest>
+    {
+        public NewBoardRequestValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .MinimumLength(3);
+
+            RuleFor(x => x.Description)
+                .MaximumLength(500);
+        }
     }
 }

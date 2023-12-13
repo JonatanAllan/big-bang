@@ -1,8 +1,8 @@
-﻿using Domain.Interfaces.Repositories;
-using Domain.Interfaces.UnitOfWork;
-using Infrastructure.Context;
-using Infrastructure.Repositories;
-using Infrastructure.UnitOfWork;
+﻿using Application.Services.UnitOfWork;
+using Data.Context;
+using Data.Repositories;
+using Data.UnitOfWork;
+using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Extensions

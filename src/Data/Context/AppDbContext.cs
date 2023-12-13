@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
-using Infrastructure.Mapping;
+﻿using Data.Mapping;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Context
+namespace Data.Context
 {
     public sealed class AppDbContext : DbContext
     {

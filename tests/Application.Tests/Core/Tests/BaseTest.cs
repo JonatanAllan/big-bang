@@ -1,6 +1,6 @@
 ﻿using static Application.Tests.Testing;
 
-namespace Application.Tests.Core.Fixture
+namespace Application.Tests.Core.Tests
 {
     [TestFixture]
     public abstract class BaseTest

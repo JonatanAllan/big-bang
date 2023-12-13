@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 
-namespace Infrastructure.Mapping
+namespace Data.Mapping
 {
     public class BaseMap<T> : IEntityTypeConfiguration<T> where T : BaseEntity
     {

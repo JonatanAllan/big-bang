@@ -1,4 +1,7 @@
 ﻿using Application;
+using Application.Common.Behaviours;
+using MediatR;
+using FluentValidation;
 
 namespace Api.Extensions
 {
@@ -6,9 +9,11 @@ namespace Api.Extensions
     {
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
+            services.AddValidatorsFromAssembly(typeof(IAssemblyMaker).Assembly);
             services.AddMediatR(config =>
             {
                 config.RegisterServicesFromAssembly(typeof(IAssemblyMaker).Assembly);
+                config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             });
 
             return services;

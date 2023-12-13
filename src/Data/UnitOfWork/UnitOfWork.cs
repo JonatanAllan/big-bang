@@ -1,7 +1,7 @@
-﻿using Domain.Interfaces.UnitOfWork;
-using Infrastructure.Context;
+﻿using Application.Services.UnitOfWork;
+using Data.Context;
 
-namespace Infrastructure.UnitOfWork
+namespace Data.UnitOfWork
 {
     public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {

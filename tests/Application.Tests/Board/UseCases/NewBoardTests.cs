@@ -1,6 +1,5 @@
 ﻿using Application.Tests.Core.Builders;
-using Application.Tests.Core.Fixture;
-using Application.UseCases.NewBoard;
+using Application.Tests.Core.Tests;
 using static Application.Tests.Testing;
 
 namespace Application.Tests.Board.UseCases

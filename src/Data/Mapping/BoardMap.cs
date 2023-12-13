@@ -1,9 +1,9 @@
-﻿using Domain.Entities;
-using Infrastructure.Context;
+﻿using Data.Context;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mapping
+namespace Data.Mapping
 {
     public class BoardMap : BaseMap<Board>
     {

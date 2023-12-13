@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
+﻿using Data.Context;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
-using Infrastructure.Context;
 
-namespace Infrastructure.Repositories
+namespace Data.Repositories
 {
     public class BoardRepository : BaseRepository<Board>, IBoardRepository
     {

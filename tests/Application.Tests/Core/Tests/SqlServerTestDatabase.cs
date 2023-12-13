@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
-using Infrastructure.Context;
-using Respawn;
+﻿using Data.Context;
+using Microsoft.EntityFrameworkCore;
 
-namespace Application.Tests.Core.Fixture
+namespace Application.Tests.Core.Tests
 {
     public class SqlServerTestDatabase : ITestDatabase
     {

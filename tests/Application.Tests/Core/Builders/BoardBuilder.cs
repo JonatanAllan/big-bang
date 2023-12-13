@@ -5,21 +5,21 @@ namespace Application.Tests.Core.Builders
 {
     public class BoardBuilder
     {
-        private static Faker faker = new Faker();
+        private static readonly Faker Faker = new();
         public static NewBoardRequest BuildNewBoardRequest()
         {
             return new NewBoardRequest
             {
-                Name = $"Board {faker.Company.CompanyName()}",
-                Description = faker.Lorem.Sentence(faker.Random.Int(10, 20))
+                Name = $"Board {Faker.Company.CompanyName()}",
+                Description = Faker.Lorem.Sentence(Faker.Random.Int(10, 20))
             };
         }
 
         public static Domain.Entities.Board NewBoardEntity()
         {
             return new Domain.Entities.Board(
-                $"Board {faker.Company.CompanyName()}",
-                faker.Lorem.Sentence(faker.Random.Int(10, 20))
+                $"{Faker.Company.CompanyName()} Board",
+                Faker.Lorem.Sentence(Faker.Random.Int(10, 20))
             );
         }
 

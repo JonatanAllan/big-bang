@@ -1,4 +1,4 @@
-﻿using Application.Response;
+﻿using Application.Common.Response;
 using Application.UseCases.GetBoards;
 using Application.UseCases.NewBoard;
 using MediatR;

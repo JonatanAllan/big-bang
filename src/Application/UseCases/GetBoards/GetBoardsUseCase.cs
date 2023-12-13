@@ -4,7 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Response;
+using Application.Common.Response;
+using Core.Extensions;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using MediatR;
@@ -21,10 +22,13 @@ namespace Application.UseCases.GetBoards
         }
         public async Task<ApiResponsePagination<GetBoardsResponse>> Handle(GetBoardsRequest request, CancellationToken cancellationToken)
         {
-            Expression<Func<Board, bool>> predicate = x => true;
+            var predicate = PredicateBuilder.True<Board>();
+            if (!string.IsNullOrEmpty(request.Name))
+                predicate = predicate.And(s => s.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase));
+
             var boards = await _boardRepository.GetManyAsync(predicate, request.Skip, request.Take);
             var total = await _boardRepository.CountAsync(predicate);
-            var items = boards.Select(s => new GetBoardsResponse(s));
+            var items = boards.Select(s => new GetBoardsResponse(s)).ToList();
             return new ApiResponsePagination<GetBoardsResponse>(items, total);
         }
     }

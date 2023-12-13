@@ -1,5 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
-using Domain.Interfaces.UnitOfWork;
+﻿using Application.Services.UnitOfWork;
+using Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.UseCases.NewBoard
