@@ -1,6 +1,5 @@
 ﻿using Application.Common.Response;
 using Application.UseCases.GetBoards;
-using Application.UseCases.NewBoard;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +7,7 @@ namespace Api.UseCases.V1.Board.GetBoards
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     public sealed class BoardController : ControllerBase
     {
         private readonly IMediator _mediator;
