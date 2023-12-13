@@ -18,6 +18,8 @@ namespace Application.UseCases.NewBoard
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .MinimumLength(3);
+            RuleFor(x => x.Name)
+                .MaximumLength(50);
 
             RuleFor(x => x.Description)
                 .MaximumLength(500);

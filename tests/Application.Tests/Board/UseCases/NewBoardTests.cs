@@ -36,5 +36,41 @@ namespace Application.Tests.Board.UseCases
             await FluentActions.Invoking(() => SendAsync(request))
                 .Should().ThrowAsync<ValidationException>();
         }
+
+        [Test]
+        public async Task ShouldNotCreateANewBoardWhenNameIsEmpty()
+        {
+            // Arrange
+            var request = BoardBuilder.BuildNewBoardRequest();
+            request.Name = string.Empty;
+
+            // Act & Assert
+            await FluentActions.Invoking(() => SendAsync(request))
+                .Should().ThrowAsync<ValidationException>();
+        }
+
+        [Test]
+        public async Task ShouldNotCreateANewBoardWhenNameIsGreaterThan50Characters()
+        {
+            // Arrange
+            var request = BoardBuilder.BuildNewBoardRequest();
+            request.Name = new string('a', 51);
+
+            // Act & Assert
+            await FluentActions.Invoking(() => SendAsync(request))
+                .Should().ThrowAsync<ValidationException>();
+        }
+
+        [Test]
+        public async Task ShouldNotCreateANewBoardWhenDescriptionIsGreaterThan500Characters()
+        {
+            // Arrange
+            var request = BoardBuilder.BuildNewBoardRequest();
+            request.Description = new string('a', 501);
+
+            // Act & Assert
+            await FluentActions.Invoking(() => SendAsync(request))
+                .Should().ThrowAsync<ValidationException>();
+        }
     }
 }

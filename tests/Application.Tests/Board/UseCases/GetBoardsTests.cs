@@ -91,5 +91,33 @@ namespace Application.Tests.Board.UseCases
             await FluentActions.Invoking(() => SendAsync(request))
                 .Should().ThrowAsync<ValidationException>();
         }
+
+        [Test]
+        public async Task ShouldFailOnGetBoardsWhenSkipIsInvalid()
+        {
+            // Arrange
+            var request = new GetBoardsRequest
+            {
+                Skip = -1
+            };
+
+            // Act & Assert
+            await FluentActions.Invoking(() => SendAsync(request))
+                .Should().ThrowAsync<ValidationException>();
+        }
+
+        [Test]
+        public async Task ShouldFailOnGetBoardsWhenTakeIsInvalid()
+        {
+            // Arrange
+            var request = new GetBoardsRequest
+            {
+                Take = 0
+            };
+
+            // Act & Assert
+            await FluentActions.Invoking(() => SendAsync(request))
+                .Should().ThrowAsync<ValidationException>();
+        }
     }
 }
