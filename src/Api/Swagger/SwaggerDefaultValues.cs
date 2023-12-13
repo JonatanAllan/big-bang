@@ -33,7 +33,7 @@ namespace Api.Swagger
             {
                 var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
 
-                parameter.Description ??= description.ModelMetadata.Description;
+                parameter.Description ??= description.ModelMetadata?.Description;
 
                 if (parameter.Schema.Default == null && description.DefaultValue != null)
                 {

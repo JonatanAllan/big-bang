@@ -6,7 +6,7 @@ namespace Api.UseCases.V1.Board.NewBoard
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     public sealed class BoardController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,4 +23,4 @@ namespace Api.UseCases.V1.Board.NewBoard
             return StatusCode(StatusCodes.Status201Created, response);
         }
     }
-}
+ }

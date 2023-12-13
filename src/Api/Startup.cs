@@ -4,6 +4,7 @@ using Api.Infrastructure;
 using Api.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -25,7 +26,9 @@ public class Startup
         {
             options.ReportApiVersions = true;
             options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new ApiVersion(1, 1);
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.ApiVersionReader = ApiVersionReader.Combine(new HeaderApiVersionReader("x-api-version"),
+                                                                new MediaTypeApiVersionReader("x-api-version"));
         });
 
         services.AddVersionedApiExplorer(options =>
