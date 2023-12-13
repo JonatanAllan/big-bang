@@ -1,4 +1,5 @@
-﻿using Application.Tests.Core.Builders;
+﻿using Application.Common.Exceptions;
+using Application.Tests.Core.Builders;
 using Application.Tests.Core.Tests;
 using Application.UseCases.GetBoards;
 using static Application.Tests.Testing;
@@ -75,6 +76,20 @@ namespace Application.Tests.Board.UseCases
                 response.Total.Should().Be(expected.Count);
                 Assert.That(expected.Select(x => x.Id), Is.EquivalentTo(response.Data.Select(x => x.Id)));
             });
+        }
+
+        [Test]
+        public async Task ShouldFailOnGetBoardsWhenNameIsInvalid()
+        {
+            // Arrange
+            var request = new GetBoardsRequest
+            {
+                Name = "a"
+            };
+
+            // Act & Assert
+            await FluentActions.Invoking(() => SendAsync(request))
+                .Should().ThrowAsync<ValidationException>();
         }
     }
 }

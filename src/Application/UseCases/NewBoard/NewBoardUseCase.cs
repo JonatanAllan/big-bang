@@ -1,4 +1,5 @@
-﻿using Application.Services.UnitOfWork;
+﻿using Application.Common.Exceptions;
+using Application.Services.UnitOfWork;
 using Domain.Interfaces.Repositories;
 using MediatR;
 
@@ -22,7 +23,7 @@ namespace Application.UseCases.NewBoard
         {
             var boardExists = await _boardRepository.ExistsAsync(x => x.Name.Equals(request.Name, StringComparison.InvariantCulture));
             if (boardExists)
-                throw new Exception("Board already exists");
+                throw new ValidationException("Board","Already exists");
         }
        
     }

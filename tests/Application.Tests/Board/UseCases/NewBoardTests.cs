@@ -1,4 +1,5 @@
-﻿using Application.Tests.Core.Builders;
+﻿using Application.Common.Exceptions;
+using Application.Tests.Core.Builders;
 using Application.Tests.Core.Tests;
 using static Application.Tests.Testing;
 
@@ -33,7 +34,7 @@ namespace Application.Tests.Board.UseCases
 
             // Act & Assert
             await FluentActions.Invoking(() => SendAsync(request))
-                .Should().ThrowAsync<Exception>().WithMessage("Board already exists");
+                .Should().ThrowAsync<ValidationException>();
         }
     }
 }

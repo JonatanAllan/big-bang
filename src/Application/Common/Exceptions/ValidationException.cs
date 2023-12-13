@@ -12,6 +12,15 @@ namespace Application.Common.Exceptions
                 .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
         }
 
+        public ValidationException(string objectName, string message)
+            : this()
+        {
+            Errors = new Dictionary<string, string[]>
+            {
+                { objectName, new[] { message } }
+            };
+        }
+
         public IDictionary<string, string[]> Errors { get; } = new Dictionary<string, string[]>();
     }
 }
