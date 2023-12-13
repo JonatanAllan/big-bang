@@ -27,8 +27,7 @@ public class Startup
             options.ReportApiVersions = true;
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.DefaultApiVersion = new ApiVersion(1, 0);
-            options.ApiVersionReader = ApiVersionReader.Combine(new HeaderApiVersionReader("x-api-version"),
-                                                                new MediaTypeApiVersionReader("x-api-version"));
+            options.ApiVersionReader = ApiVersionReader.Combine(new HeaderApiVersionReader("x-api-version"));
         });
 
         services.AddVersionedApiExplorer(options =>
