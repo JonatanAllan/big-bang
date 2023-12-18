@@ -15,6 +15,7 @@ namespace Application.Tests.Board.UseCases
             var boards = BoardBuilder.ManyNewBoardEntity(30);
             await AddManyAsync(boards);
             var request = new GetBoardsRequest();
+            request.Name = null;
 
             // Act
             var response = await SendAsync(request);
@@ -36,6 +37,7 @@ namespace Application.Tests.Board.UseCases
             
             var request = new GetBoardsRequest
             {
+                Name = null,
                 Skip = 10,
                 Take = 15
             };

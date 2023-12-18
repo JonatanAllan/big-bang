@@ -31,7 +31,8 @@ namespace Application.UseCases.GetBoards
             RuleFor(x => x.Take) .GreaterThanOrEqualTo(1);
             RuleFor(x => x.Take).LessThanOrEqualTo(50);
             RuleFor(x => x.Name)
-                .MinimumLength(3);
+                .MinimumLength(3)
+                .When(x => x != null);
         }
     }
 }
