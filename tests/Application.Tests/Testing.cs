@@ -1,5 +1,5 @@
-﻿using Application.Tests.Core.Tests;
-using Data.Context;
+﻿using Application.Services.UnitOfWork;
+using Application.Tests.Core.Tests;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +18,7 @@ namespace Application.Tests
             _database = new SqlServerTestDatabase();
             _factory = new CustomWebApplicationFactory();
             _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
-            await _database.InitialiseAsync();
+            await _database.InitialiseAsync(_scopeFactory);
         }
 
         public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -28,28 +28,24 @@ namespace Application.Tests
             return await mediator.Send(request);
         }
 
-        public static async Task AddAsync<TEntity>(TEntity entity)
-            where TEntity : class
+        public static async Task AddManyAsync(List<Domain.Entities.Board> entities)
         {
             using var scope = _scopeFactory.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            context.Add(entity);
-            await context.SaveChangesAsync();
-        }
+            var context = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
 
-        public static async Task AddManyAsync<TEntity>(List<TEntity> entities)
-            where TEntity : class
-        {
-            using var scope = _scopeFactory.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            context.AddRange(entities);
-            await context.SaveChangesAsync();
+            foreach (var item in entities)
+            {
+                await context.BoardRepository.AddAsync(item);
+            }
         }
 
         public static async Task ResetState()
         {
             if (_database != null)
-                await _database.ResetAsync();
+            {
+                _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
+                await _database.ResetAsync(_scopeFactory);
+            }
         }
 
         [OneTimeTearDown]

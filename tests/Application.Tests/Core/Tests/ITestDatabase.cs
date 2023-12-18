@@ -1,8 +1,11 @@
-﻿namespace Application.Tests.Core.Tests
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Application.Tests.Core.Tests
 {
     public interface ITestDatabase
     {
-        Task InitialiseAsync();
-        Task ResetAsync();
+        Task InitialiseAsync(IServiceScopeFactory serviceScopeFactory);
+
+        Task ResetAsync(IServiceScopeFactory serviceScopeFactory);
     }
 }

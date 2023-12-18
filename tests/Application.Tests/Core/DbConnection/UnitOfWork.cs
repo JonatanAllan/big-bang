@@ -2,7 +2,7 @@
 using Data.Repositories;
 using Domain.Interfaces.Repositories;
 
-namespace Data.UnitOfWork
+namespace Application.Tests.Core.DbConnection
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {

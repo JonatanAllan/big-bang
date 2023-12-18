@@ -26,8 +26,10 @@ namespace Application.Tests.Core.Builders
         public static List<Domain.Entities.Board> ManyNewBoardEntity(int quantity)
         {
             var boards = new List<Domain.Entities.Board>();
+
             for (var i = 0; i < quantity; i++)
                 boards.Add(NewBoardEntity());
+
             return boards;
         }
     }

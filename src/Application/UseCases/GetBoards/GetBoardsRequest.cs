@@ -1,17 +1,21 @@
 ﻿using Application.Common.Response;
 using FluentValidation;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.UseCases.GetBoards
 {
     public class GetBoardsRequest : IRequest<ApiResponsePagination<GetBoardsResponse>>
     {
-        public string? Name { get; set; }
+        public string? Name { get; set; } = string.Empty;
+
         public int Skip { get; set; } = 0;
+
         public int Take { get; set; } = 25;
+
         public GetBoardsRequest() { }
 
-        public GetBoardsRequest(string? name, int skip, int take)
+        public GetBoardsRequest(string name, int skip, int take)
         {
             Name = name;
             Skip = skip;

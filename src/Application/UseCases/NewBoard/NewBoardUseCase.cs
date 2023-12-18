@@ -13,16 +13,20 @@ namespace Application.UseCases.NewBoard
         public async Task<NewBoardResponse> Handle(NewBoardRequest request, CancellationToken cancellationToken)
         {
             await Validate(request);
+
             var board = request.ToEntity();
             await _boardRepository.AddAsync(board);
-            _unitOfWork.SaveChanges();
+
+            _unitOfWork.Commit();
+
             return new NewBoardResponse(board);
         }
 
         private async Task Validate(NewBoardRequest request)
         {
-            var boardExists = await _boardRepository.ExistsAsync(x => x.Name.Equals(request.Name, StringComparison.InvariantCulture));
-            if (boardExists)
+            var count = await _boardRepository.CountByNameAsync(request.Name);
+
+            if (count > 0)
                 throw new ValidationException("Board","Already exists");
         }
        

@@ -62,7 +62,7 @@ namespace Application.Tests.Board.UseCases
             var name = boards.First(x => x.Name.Length >= 5).Name;
             var request = new GetBoardsRequest
             {
-                Name = name[..5]
+                Name = name
             };
 
             // Act

@@ -1,19 +1,27 @@
-﻿using System.Linq.Expressions;
-using Domain.Entities;
+﻿using Domain.Entities;
 
 namespace Domain.Interfaces.Repositories
 {
     public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
+        /// <summary>
+        /// Gets an entity by its id.
+        /// </summary>
         Task<TEntity?> GetByIdAsync(int id);
-        Task<TEntity?> GetOneAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<IEnumerable<TEntity>> GetManyAsync(Expression<Func<TEntity, bool>> predicate, int skip, int take, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null);
-        Task AddAsync(TEntity entity);
-        Task UpdateAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
-        Task<bool> ExistsAsync(int id);
-        Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
-        int Count(Expression<Func<TEntity, bool>> predicate);
+
+        /// <summary>
+        /// Adds an entity to the repository.
+        /// </summary>
+        Task<bool> AddAsync(TEntity entity);
+
+        /// <summary>
+        /// Updates an entity in the repository.
+        /// </summary>
+        Task<bool> UpdateAsync(TEntity entity);
+
+        /// <summary>
+        /// Deletes an entity from the repository.
+        /// </summary>
+        Task<bool> DeleteById(int id);
     }
 }

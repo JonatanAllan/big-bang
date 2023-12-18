@@ -1,30 +1,33 @@
-﻿using Data.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Application.Services.UnitOfWork;
+using Domain.Interfaces.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Tests.Core.Tests
 {
     public class SqlServerTestDatabase : ITestDatabase
     {
-        private AppDbContext _context = null!;
-        private const string DatabaseName = "sample";
+        private IDbSession _dbSession;
 
-        public async Task InitialiseAsync()
+        public async Task InitialiseAsync(IServiceScopeFactory serviceScopeFactory)
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(DatabaseName)
-            .Options;
+            _dbSession = serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<IDbSession>();
+            var command = _dbSession.Connection.CreateCommand();
 
-            _context = new AppDbContext(options);
+            command.CommandText = "CREATE TABLE IF NOT EXISTS Boards (Id int, Name varchar(200), Description varchar(2000))";
+            command.ExecuteNonQuery();
 
-            if (_context.Database.IsRelational())
-                await _context.Database.MigrateAsync();
-
-            await _context.Database.EnsureCreatedAsync();
+            _dbSession.Connection.Close();
         }
 
-        public async Task ResetAsync()
+        public async Task ResetAsync(IServiceScopeFactory serviceScopeFactory)
         {
-            await _context.Database.EnsureDeletedAsync();
+            _dbSession = serviceScopeFactory.CreateScope().ServiceProvider.GetRequiredService<IDbSession>();
+            var command = _dbSession.Connection.CreateCommand();
+
+            command.CommandText = "delete from Boards";
+            command.ExecuteNonQuery();
+
+            _dbSession.Connection.Close();
         }
 
         private void SeedData()

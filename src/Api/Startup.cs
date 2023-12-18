@@ -46,7 +46,7 @@ public class Startup
             options.IncludeXmlComments(xmlPath);
         });
 
-        services.AddCustomSqlServer(_configuration);
+        services.AddRepositories(_configuration);
         services.AddUseCases();
         services.AddExceptionHandler<CustomExceptionHandler>();
     }
