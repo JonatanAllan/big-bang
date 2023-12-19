@@ -1,7 +1,7 @@
-﻿using CaliberFS.Template.Application.Common.Behaviours;
-using MediatR;
+﻿using CaliberFS.Template.Application;
+using CaliberFS.Template.Application.Common.Behaviours;
 using FluentValidation;
-using CaliberFS.Template.Application;
+using MediatR;
 
 namespace CaliberFS.Template.WebApi.Extensions
 {

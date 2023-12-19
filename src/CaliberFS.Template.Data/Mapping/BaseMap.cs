@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using CaliberFS.Template.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using CaliberFS.Template.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CaliberFS.Template.Data.Mapping
 {
