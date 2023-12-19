@@ -25,7 +25,7 @@ namespace CaliberFS.Template.WebApi.Swagger
                 Title = "APISample",
                 Version = description.ApiVersion.ToString(),
                 Description = "Example with the API using Swagger, Swashbuckle and API version.",
-                Contact = new OpenApiContact { Name = "Luby Software", Url = new Uri("https://luby.com.br") },
+                Contact = new OpenApiContact { Name = "CaliberFS", Url = new Uri("https://www.caliberfs.com/") },
                 License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };
 

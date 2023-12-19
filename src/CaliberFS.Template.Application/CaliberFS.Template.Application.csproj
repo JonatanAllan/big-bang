@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\CaliberFS.Template.Core.csproj" />
-    <ProjectReference Include="..\Domain\CaliberFS.Template.Domain.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.Core\CaliberFS.Template.Core.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.Domain\CaliberFS.Template.Domain.csproj" />
   </ItemGroup>
 
 </Project>

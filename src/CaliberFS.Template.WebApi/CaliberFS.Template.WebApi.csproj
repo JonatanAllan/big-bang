@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\CaliberFS.Template.Application.csproj" />
-    <ProjectReference Include="..\Data\CaliberFS.Template.Data.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.Application\CaliberFS.Template.Application.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.Data\CaliberFS.Template.Data.csproj" />
   </ItemGroup>
 	
 </Project>

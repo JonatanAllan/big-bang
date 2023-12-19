@@ -28,9 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Api\CaliberFS.Template.WebApi.csproj" />
-    <ProjectReference Include="..\..\src\Application\CaliberFS.Template.Application.csproj" />
-    <ProjectReference Include="..\..\src\Data\CaliberFS.Template.Data.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.Application\CaliberFS.Template.Application.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.Data\CaliberFS.Template.Data.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.WebApi\CaliberFS.Template.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
