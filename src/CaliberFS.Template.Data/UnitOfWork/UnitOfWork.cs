@@ -1,5 +1,4 @@
 ﻿using CaliberFS.Template.Application.Services.UnitOfWork;
-using CaliberFS.Template.Data.Repositories;
 using CaliberFS.Template.Domain.Interfaces.Repositories;
 
 namespace CaliberFS.Template.Data.UnitOfWork
@@ -10,10 +9,10 @@ namespace CaliberFS.Template.Data.UnitOfWork
 
         public IBoardRepository BoardRepository { get; internal set; }
 
-        public UnitOfWork(IDbSession session)
+        public UnitOfWork(IDbSession session, IBoardRepository boardRepository)
         {
             _session = session;
-            BoardRepository = new BoardRepository(_session);
+            BoardRepository = boardRepository;
         }
 
         public void BeginTransaction()
