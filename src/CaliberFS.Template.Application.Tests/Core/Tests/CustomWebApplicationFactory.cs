@@ -1,5 +1,4 @@
-﻿using CaliberFS.Template.Data.Context;
-using CaliberFS.Template.WebApi;
+﻿using CaliberFS.Template.WebApi;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
