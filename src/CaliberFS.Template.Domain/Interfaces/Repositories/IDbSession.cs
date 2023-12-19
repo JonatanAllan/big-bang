@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Domain.Interfaces.Repositories
+namespace CaliberFS.Template.Domain.Interfaces.Repositories
 {
     public interface IDbSession : IDisposable
     {

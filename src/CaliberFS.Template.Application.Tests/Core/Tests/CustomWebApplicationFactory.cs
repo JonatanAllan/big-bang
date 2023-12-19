@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using CaliberFS.Template.WebApi;
-using CaliberFS.Template.Data.Context;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;

@@ -1,5 +1,5 @@
-﻿using CaliberFS.Template.Data.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using CaliberFS.Template.Domain.Interfaces.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CaliberFS.Template.Application.Tests.Core.Tests
 {

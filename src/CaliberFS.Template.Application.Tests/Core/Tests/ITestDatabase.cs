@@ -1,4 +1,6 @@
-﻿namespace CaliberFS.Template.Application.Tests.Core.Tests
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace CaliberFS.Template.Application.Tests.Core.Tests
 {
     public interface ITestDatabase
     {

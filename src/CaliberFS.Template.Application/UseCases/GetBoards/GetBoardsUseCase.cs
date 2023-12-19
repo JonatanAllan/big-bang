@@ -1,6 +1,4 @@
 ﻿using CaliberFS.Template.Application.Common.Response;
-using CaliberFS.Template.Core.Extensions;
-using CaliberFS.Template.Domain.Entities;
 using CaliberFS.Template.Domain.Interfaces.Repositories;
 using MediatR;
 

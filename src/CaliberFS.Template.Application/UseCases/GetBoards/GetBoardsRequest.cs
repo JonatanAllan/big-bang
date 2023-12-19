@@ -1,7 +1,6 @@
 ﻿using CaliberFS.Template.Application.Common.Response;
 using FluentValidation;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace CaliberFS.Template.Application.UseCases.GetBoards
 {

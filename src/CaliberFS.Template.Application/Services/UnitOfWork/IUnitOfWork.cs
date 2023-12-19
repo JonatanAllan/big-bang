@@ -1,4 +1,6 @@
-﻿namespace CaliberFS.Template.Application.Services.UnitOfWork
+﻿using CaliberFS.Template.Domain.Interfaces.Repositories;
+
+namespace CaliberFS.Template.Application.Services.UnitOfWork
 {
     public interface IUnitOfWork
     {

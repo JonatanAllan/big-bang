@@ -1,5 +1,5 @@
-﻿using CaliberFS.Template.Application.Tests.Core.Tests;
-using CaliberFS.Template.Data.Context;
+﻿using CaliberFS.Template.Application.Services.UnitOfWork;
+using CaliberFS.Template.Application.Tests.Core.Tests;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

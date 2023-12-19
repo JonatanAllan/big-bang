@@ -2,7 +2,7 @@
 using CaliberFS.Template.Data.Repositories;
 using CaliberFS.Template.Domain.Interfaces.Repositories;
 
-namespace CaliberFS.Template.Data.UnitOfWork
+namespace CaliberFS.Template.Application.Tests.Core.DbConnection
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {

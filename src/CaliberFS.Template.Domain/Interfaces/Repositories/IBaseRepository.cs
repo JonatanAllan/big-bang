@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using CaliberFS.Template.Domain.Entities;
+﻿using CaliberFS.Template.Domain.Entities;
 
 namespace CaliberFS.Template.Domain.Interfaces.Repositories
 {

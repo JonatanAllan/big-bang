@@ -1,21 +1,21 @@
 ﻿using CaliberFS.Template.Domain.Interfaces.Repositories;
-using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
-namespace CaliberFS.Template.Data.Repositories
+namespace CaliberFS.Template.Application.Tests.Core.DbConnection
 {
     public class DbSession : IDbSession
     {
         public IDbConnection Connection { get; }
-        
+
         public IDbTransaction? Transaction { get; set; }
 
         private bool _disposed;
 
         public DbSession(IConfiguration configuration)
         {
-            Connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            Connection = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
             Connection.Open();
         }
 
