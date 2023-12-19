@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
+using CaliberFS.Template.Domain.Entities;
 
-namespace Data.Mapping
+namespace CaliberFS.Template.Data.Mapping
 {
     public class BaseMap<T> : IEntityTypeConfiguration<T> where T : BaseEntity
     {

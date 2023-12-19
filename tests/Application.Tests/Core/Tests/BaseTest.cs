@@ -1,6 +1,6 @@
-﻿using static Application.Tests.Testing;
+﻿using static CaliberFS.Template.Application.Tests.Testing;
 
-namespace Application.Tests.Core.Tests
+namespace CaliberFS.Template.Application.Tests.Core.Tests
 {
     [TestFixture]
     public abstract class BaseTest

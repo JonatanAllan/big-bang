@@ -1,4 +1,4 @@
-﻿namespace Application.UseCases.NewBoard
+﻿namespace CaliberFS.Template.Application.UseCases.NewBoard
 {
     public class NewBoardResponse(Domain.Entities.Board board)
     {

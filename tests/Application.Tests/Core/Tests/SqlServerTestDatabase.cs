@@ -1,7 +1,7 @@
-﻿using Data.Context;
+﻿using CaliberFS.Template.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Tests.Core.Tests
+namespace CaliberFS.Template.Application.Tests.Core.Tests
 {
     public class SqlServerTestDatabase : ITestDatabase
     {

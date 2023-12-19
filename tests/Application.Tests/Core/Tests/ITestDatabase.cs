@@ -1,4 +1,4 @@
-﻿namespace Application.Tests.Core.Tests
+﻿namespace CaliberFS.Template.Application.Tests.Core.Tests
 {
     public interface ITestDatabase
     {

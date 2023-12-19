@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Api.Swagger
+namespace CaliberFS.Template.WebApi.Swagger
 {
     public class PathLowercaseDocumentFilter : IDocumentFilter
     {

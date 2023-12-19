@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Response
+﻿namespace CaliberFS.Template.Application.Common.Response
 {
     public class ApiResponsePagination<T>(IList<T> data, int total)
     {

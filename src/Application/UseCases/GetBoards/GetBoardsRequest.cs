@@ -1,8 +1,8 @@
-﻿using Application.Common.Response;
+﻿using CaliberFS.Template.Application.Common.Response;
 using FluentValidation;
 using MediatR;
 
-namespace Application.UseCases.GetBoards
+namespace CaliberFS.Template.Application.UseCases.GetBoards
 {
     public class GetBoardsRequest : IRequest<ApiResponsePagination<GetBoardsResponse>>
     {

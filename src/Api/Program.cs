@@ -1,4 +1,4 @@
-namespace Api;
+namespace CaliberFS.Template.WebApi;
 
 public class Program
 {

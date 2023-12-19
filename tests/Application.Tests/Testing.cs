@@ -1,9 +1,9 @@
-﻿using Application.Tests.Core.Tests;
-using Data.Context;
+﻿using CaliberFS.Template.Application.Tests.Core.Tests;
+using CaliberFS.Template.Data.Context;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Tests
+namespace CaliberFS.Template.Application.Tests
 {
     [SetUpFixture]
     public class Testing

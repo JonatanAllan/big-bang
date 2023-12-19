@@ -1,7 +1,7 @@
-﻿using Application.Services.UnitOfWork;
-using Data.Context;
+﻿using CaliberFS.Template.Application.Services.UnitOfWork;
+using CaliberFS.Template.Data.Context;
 
-namespace Data.UnitOfWork
+namespace CaliberFS.Template.Data.UnitOfWork
 {
     public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {

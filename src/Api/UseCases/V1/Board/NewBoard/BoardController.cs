@@ -1,8 +1,8 @@
-﻿using Application.UseCases.NewBoard;
+﻿using CaliberFS.Template.Application.UseCases.NewBoard;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.UseCases.V1.Board.NewBoard
+namespace CaliberFS.Template.WebApi.UseCases.V1.Board.NewBoard
 {
     [ApiVersion("1.0")]
     [ApiController]

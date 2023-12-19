@@ -1,3 +1,3 @@
-﻿namespace Application.Common.Exceptions;
+﻿namespace CaliberFS.Template.Application.Common.Exceptions;
 
 public class ForbiddenAccessException : Exception;

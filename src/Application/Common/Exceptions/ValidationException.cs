@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace Application.Common.Exceptions
+namespace CaliberFS.Template.Application.Common.Exceptions
 {
     public class ValidationException() : Exception("One or more validation failures have occurred.")
     {

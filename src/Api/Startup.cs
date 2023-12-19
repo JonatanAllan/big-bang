@@ -1,14 +1,14 @@
-using System.Reflection;
-using Api.Extensions;
-using Api.Infrastructure;
-using Api.Swagger;
+using CaliberFS.Template.WebApi.Extensions;
+using CaliberFS.Template.WebApi.Infrastructure;
+using CaliberFS.Template.WebApi.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
-namespace Api;
+namespace CaliberFS.Template.WebApi;
 
 public class Startup
 {

@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using CaliberFS.Template.Domain.Entities;
 
-namespace Domain.Interfaces.Repositories
+namespace CaliberFS.Template.Domain.Interfaces.Repositories
 {
     public interface IBoardRepository : IBaseRepository<Board>
     {

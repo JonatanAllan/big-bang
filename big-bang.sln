@@ -11,19 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - Infrastructure", "{72C3F2D7-EC69-46BB-9A89-BDD2612B169D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{BEEE3170-B9B9-4B23-92D1-727AB9AB6DB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Domain", "src\Domain\CaliberFS.Template.Domain.csproj", "{BEEE3170-B9B9-4B23-92D1-727AB9AB6DB3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "src\Data\Data.csproj", "{B2E54558-A4A1-4D6A-A56A-BAD4E1679E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Data", "src\Data\CaliberFS.Template.Data.csproj", "{B2E54558-A4A1-4D6A-A56A-BAD4E1679E1B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{17D24F34-2877-4E8B-9BCB-3A8046FF58CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Application", "src\Application\CaliberFS.Template.Application.csproj", "{17D24F34-2877-4E8B-9BCB-3A8046FF58CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj", "{D0CF7A7B-A75C-4756-998B-287E7E71FE75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.WebApi", "src\Api\CaliberFS.Template.WebApi.csproj", "{D0CF7A7B-A75C-4756-998B-287E7E71FE75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{BB8AC2AA-66F7-4644-B3F7-63D7CCD16946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Tests", "tests\Application.Tests\Application.Tests.csproj", "{A2A24ED0-ACFC-46FD-B899-024C2D3862FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Application.Tests", "tests\Application.Tests\CaliberFS.Template.Application.Tests.csproj", "{A2A24ED0-ACFC-46FD-B899-024C2D3862FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{EDD05A29-4807-4500-AB5C-3C87BAD3A00C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Core", "src\Core\CaliberFS.Template.Core.csproj", "{EDD05A29-4807-4500-AB5C-3C87BAD3A00C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

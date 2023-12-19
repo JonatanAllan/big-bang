@@ -1,8 +1,8 @@
-﻿using Data.Mapping;
-using Domain.Entities;
+﻿using CaliberFS.Template.Data.Mapping;
+using CaliberFS.Template.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Context
+namespace CaliberFS.Template.Data.Context
 {
     public sealed class AppDbContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace Application.UseCases.NewBoard
+namespace CaliberFS.Template.Application.UseCases.NewBoard
 {
     public class NewBoardRequest : IRequest<NewBoardResponse>
     {

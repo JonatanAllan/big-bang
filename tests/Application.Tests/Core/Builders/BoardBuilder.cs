@@ -1,7 +1,7 @@
-﻿using Application.UseCases.NewBoard;
+﻿using CaliberFS.Template.Application.UseCases.NewBoard;
 using Bogus;
 
-namespace Application.Tests.Core.Builders
+namespace CaliberFS.Template.Application.Tests.Core.Builders
 {
     public class BoardBuilder
     {

@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using CaliberFS.Template.Domain.Entities;
 
-namespace Application.UseCases.GetBoards
+namespace CaliberFS.Template.Application.UseCases.GetBoards
 {
     public class GetBoardsResponse(Board board)
     {

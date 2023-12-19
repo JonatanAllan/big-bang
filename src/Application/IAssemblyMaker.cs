@@ -1,4 +1,4 @@
-﻿namespace Application
+﻿namespace CaliberFS.Template.Application
 {
     public interface IAssemblyMaker {}
 }

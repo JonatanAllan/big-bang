@@ -1,9 +1,9 @@
-﻿using Application;
-using Application.Common.Behaviours;
+﻿using CaliberFS.Template.Application.Common.Behaviours;
 using MediatR;
 using FluentValidation;
+using CaliberFS.Template.Application;
 
-namespace Api.Extensions
+namespace CaliberFS.Template.WebApi.Extensions
 {
     public static class UseCasesExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace Application.Services.UnitOfWork
+﻿namespace CaliberFS.Template.Application.Services.UnitOfWork
 {
     public interface IUnitOfWork
     {

@@ -1,9 +1,9 @@
-﻿using Application.Common.Response;
-using Application.UseCases.GetBoards;
+﻿using CaliberFS.Template.Application.Common.Response;
+using CaliberFS.Template.Application.UseCases.GetBoards;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.UseCases.V1.Board.GetBoards
+namespace CaliberFS.Template.WebApi.UseCases.V1.Board.GetBoards
 {
     [ApiVersion("1.0")]
     [ApiController]

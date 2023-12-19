@@ -1,10 +1,10 @@
-﻿using Application.Common.Response;
-using Core.Extensions;
-using Domain.Entities;
-using Domain.Interfaces.Repositories;
+﻿using CaliberFS.Template.Application.Common.Response;
+using CaliberFS.Template.Core.Extensions;
+using CaliberFS.Template.Domain.Entities;
+using CaliberFS.Template.Domain.Interfaces.Repositories;
 using MediatR;
 
-namespace Application.UseCases.GetBoards
+namespace CaliberFS.Template.Application.UseCases.GetBoards
 {
     public class GetBoardsUseCase : IRequestHandler<GetBoardsRequest, ApiResponsePagination<GetBoardsResponse>>
     {

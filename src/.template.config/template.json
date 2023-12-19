@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "CaliberFS",
+    "classifications": [ "Web" ],
+    "identity": "CaliberFS.Template.WebApi",
+    "name": "CaliberFS WebApi Template",
+    "shortName": "caliberfs-webapi",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+      },
+    "preferNameDirectory": true,
+    "sourceName": "CaliberFS.Template"
+}

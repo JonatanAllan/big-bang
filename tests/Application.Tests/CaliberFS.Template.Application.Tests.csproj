@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -28,9 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Api\Api.csproj" />
-    <ProjectReference Include="..\..\src\Application\Application.csproj" />
-    <ProjectReference Include="..\..\src\Data\Data.csproj" />
+    <ProjectReference Include="..\..\src\Api\CaliberFS.Template.WebApi.csproj" />
+    <ProjectReference Include="..\..\src\Application\CaliberFS.Template.Application.csproj" />
+    <ProjectReference Include="..\..\src\Data\CaliberFS.Template.Data.csproj" />
   </ItemGroup>
 
 </Project>

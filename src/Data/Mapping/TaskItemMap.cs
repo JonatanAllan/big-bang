@@ -1,9 +1,9 @@
-﻿using Data.Context;
-using Domain.Entities;
+﻿using CaliberFS.Template.Data.Context;
+using CaliberFS.Template.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.Mapping
+namespace CaliberFS.Template.Data.Mapping
 {
     public class TaskItemMap : BaseMap<TaskItem>
     {

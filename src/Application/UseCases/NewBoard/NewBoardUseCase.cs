@@ -1,9 +1,9 @@
-﻿using Application.Common.Exceptions;
-using Application.Services.UnitOfWork;
-using Domain.Interfaces.Repositories;
+﻿using CaliberFS.Template.Application.Common.Exceptions;
+using CaliberFS.Template.Application.Services.UnitOfWork;
+using CaliberFS.Template.Domain.Interfaces.Repositories;
 using MediatR;
 
-namespace Application.UseCases.NewBoard
+namespace CaliberFS.Template.Application.UseCases.NewBoard
 {
     public class NewBoardUseCase(IBoardRepository boardRepository, IUnitOfWork unitOfWork) : IRequestHandler<NewBoardRequest, NewBoardResponse>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Core.Extensions
+namespace CaliberFS.Template.Core.Extensions
 {
     /// <summary>
     /// PredicateBuilder is a extension class from LINKit library

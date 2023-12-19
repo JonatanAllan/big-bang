@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities
+﻿namespace CaliberFS.Template.Domain.Entities
 {
     public interface IAggregateRoot
     {

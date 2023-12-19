@@ -1,9 +1,9 @@
-﻿using Application.Common.Exceptions;
-using Application.Tests.Core.Builders;
-using Application.Tests.Core.Tests;
-using static Application.Tests.Testing;
+﻿using CaliberFS.Template.Application.Common.Exceptions;
+using CaliberFS.Template.Application.Tests.Core.Builders;
+using CaliberFS.Template.Application.Tests.Core.Tests;
+using static CaliberFS.Template.Application.Tests.Testing;
 
-namespace Application.Tests.Board.UseCases
+namespace CaliberFS.Template.Application.Tests.Board.UseCases
 {
     public class NewBoardTests : BaseTest
     {

@@ -1,8 +1,8 @@
-﻿using Application.Common.Exceptions;
+﻿using CaliberFS.Template.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Infrastructure
+namespace CaliberFS.Template.WebApi.Infrastructure
 {
     public class CustomExceptionHandler : IExceptionHandler
     {

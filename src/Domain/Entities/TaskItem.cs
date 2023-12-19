@@ -1,6 +1,6 @@
-﻿using Domain.Enums;
+﻿using CaliberFS.Template.Domain.Enums;
 
-namespace Domain.Entities
+namespace CaliberFS.Template.Domain.Entities
 {
     public class TaskItem : BaseEntity, IAggregateRoot
     {

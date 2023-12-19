@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
-using Data.Context;
-using Domain.Entities;
-using Domain.Interfaces.Repositories;
+using CaliberFS.Template.Data.Context;
+using CaliberFS.Template.Domain.Entities;
+using CaliberFS.Template.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Repositories
+namespace CaliberFS.Template.Data.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {

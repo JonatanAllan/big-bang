@@ -1,4 +1,4 @@
-﻿namespace Domain.Enums
+﻿namespace CaliberFS.Template.Domain.Enums
 {
     public enum TaskItemStatus
     {
