@@ -1,8 +1,8 @@
-﻿using System.Linq.Expressions;
-using CaliberFS.Template.Data.Context;
+﻿using CaliberFS.Template.Data.Context;
 using CaliberFS.Template.Domain.Entities;
 using CaliberFS.Template.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace CaliberFS.Template.Data.Repositories
 {

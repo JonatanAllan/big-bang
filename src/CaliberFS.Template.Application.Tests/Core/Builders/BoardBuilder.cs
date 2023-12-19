@@ -1,5 +1,5 @@
-﻿using CaliberFS.Template.Application.UseCases.NewBoard;
-using Bogus;
+﻿using Bogus;
+using CaliberFS.Template.Application.UseCases.NewBoard;
 
 namespace CaliberFS.Template.Application.Tests.Core.Builders
 {
