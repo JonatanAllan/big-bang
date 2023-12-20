@@ -1,0 +1,6 @@
+@CaliberFS.Template.Consumer_HostAddress = http://localhost:5134
+
+GET {{CaliberFS.Template.Consumer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
