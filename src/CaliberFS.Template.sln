@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Data", "CaliberFS.Template.Data\CaliberFS.Template.Data.csproj", "{1F1881C2-D0D9-4387-9570-A643FF1B3A8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaliberFS.Template.IoC", "CaliberFS.Template.IoC\CaliberFS.Template.IoC.csproj", "{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{1F1881C2-D0D9-4387-9570-A643FF1B3A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F1881C2-D0D9-4387-9570-A643FF1B3A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F1881C2-D0D9-4387-9570-A643FF1B3A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{5F2A77E4-3311-4A74-865D-D552C7C209BC} = {144CD7B0-D143-4EC2-94AB-E34E62C88C43}
 		{254CEFF3-B747-4118-BABE-06C184A4F7D1} = {72C3F2D7-EC69-46BB-9A89-BDD2612B169D}
 		{1F1881C2-D0D9-4387-9570-A643FF1B3A8D} = {72C3F2D7-EC69-46BB-9A89-BDD2612B169D}
+		{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA} = {72C3F2D7-EC69-46BB-9A89-BDD2612B169D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8F287BC-FCD3-40A0-AC54-7842F25657D2}

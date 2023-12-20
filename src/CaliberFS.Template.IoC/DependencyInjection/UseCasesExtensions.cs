@@ -2,8 +2,9 @@
 using CaliberFS.Template.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CaliberFS.Template.WebApi.Extensions
+namespace CaliberFS.Template.IoC.DependencyInjection
 {
     public static class UseCasesExtensions
     {
