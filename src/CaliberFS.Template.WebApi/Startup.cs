@@ -1,7 +1,8 @@
 using CaliberFS.Template.IoC.DependencyInjection;
 using CaliberFS.Template.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using CaliberFS.Template.WebApi.Extensions;
+using CaliberFS.Template.Core.RabbitMQ;
+using CaliberFS.Template.WebApi.Configuration;
 
 namespace CaliberFS.Template.WebApi;
 

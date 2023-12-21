@@ -16,6 +16,7 @@ namespace CaliberFS.Template.Application.UseCases.NewBoard
             var board = request.ToEntity();
             await _boardRepository.AddAsync(board);
             _unitOfWork.SaveChanges();
+
             return new NewBoardResponse(board);
         }
 

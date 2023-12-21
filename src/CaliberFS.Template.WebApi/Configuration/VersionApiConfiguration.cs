@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
-namespace CaliberFS.Template.WebApi.Extensions
+namespace CaliberFS.Template.WebApi.Configuration
 {
-    public static class VersionApiExtensions
+    public static class VersionApiConfiguration
     {
         public static IServiceCollection AddVersionedApi(this IServiceCollection services)
         {

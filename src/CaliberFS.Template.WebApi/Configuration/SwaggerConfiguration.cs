@@ -1,13 +1,12 @@
-﻿using CaliberFS.Template.WebApi.Swagger;
-using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using CaliberFS.Template.WebApi.Swagger;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
 
-namespace CaliberFS.Template.WebApi.Extensions
+namespace CaliberFS.Template.WebApi.Configuration
 {
-    public static class SwaggerExtensions
+    public static class SwaggerConfiguration
     {
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
