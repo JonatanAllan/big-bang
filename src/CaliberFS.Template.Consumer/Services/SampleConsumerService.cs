@@ -1,4 +1,4 @@
-﻿using CaliberFS.Template.Application.UseCases.SaveLog;
+﻿using CaliberFS.Template.Application.UseCases.HandleNewBoard;
 using CaliberFS.Template.Core.RabbitMQ.Client;
 using CaliberFS.Template.Core.RabbitMQ.Consumer;
 using MediatR;
@@ -16,8 +16,8 @@ namespace CaliberFS.Template.Consumer.Services
 
         public SampleConsumerService(
             IMediator mediator,
-            ConnectionFactory connectionFactory,
-            ILogger<LogConsumerService> logConsumerLogger,
+            IConnectionFactory connectionFactory,
+            ILogger<SampleConsumerService> sampleConsumerLogger,
             ILogger<ConsumerBaseService> consumerLogger,
             ILogger<RabbitMqClientBase> logger) :
             base(mediator, connectionFactory, consumerLogger, logger)
@@ -26,12 +26,12 @@ namespace CaliberFS.Template.Consumer.Services
             {
                 AddSampleChannel();
                 var consumer = new AsyncEventingBasicConsumer(Channel);
-                consumer.Received += OnEventReceived<SaveLogRequest>;
+                consumer.Received += OnEventReceived<HandleNewBoardRequest>;
                 Channel.BasicConsume(queue: QueueName, autoAck: false, consumer: consumer);
             }
             catch (Exception ex)
             {
-                logConsumerLogger.LogCritical(ex, "Error while consuming message");
+                sampleConsumerLogger.LogCritical(ex, "Error while consuming message");
             }
         }
 

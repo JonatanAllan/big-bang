@@ -8,7 +8,7 @@ namespace CaliberFS.Template.Application.Services.RabbitMQ
     public class SampleProducer : ProducerBase<SampleIntegrationEvent>
     {
         public SampleProducer(
-            ConnectionFactory connectionFactory,
+            IConnectionFactory connectionFactory,
             ILogger<RabbitMqClientBase> logger,
             ILogger<ProducerBase<SampleIntegrationEvent>> producerBaseLogger) :
             base(connectionFactory, logger, producerBaseLogger)
@@ -20,9 +20,10 @@ namespace CaliberFS.Template.Application.Services.RabbitMQ
         protected override string AppId => "SampleProducerId";
     }
 
-    public class SampleIntegrationEvent
+    public class SampleIntegrationEvent(int entityId, string message, Guid? correlationId = null)
     {
-        public Guid Id { get; set; }
-        public string Message { get; set; }
+        public Guid CorrelationId { get; set; } = correlationId?? Guid.NewGuid();
+        public int EntityId { get; set; } = entityId;
+        public string Message { get; set; } = message;
     }
 }

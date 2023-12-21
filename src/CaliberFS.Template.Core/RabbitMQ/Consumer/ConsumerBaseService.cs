@@ -16,7 +16,7 @@ namespace CaliberFS.Template.Core.RabbitMQ.Consumer
 
         protected ConsumerBaseService(
             IMediator mediator,
-            ConnectionFactory connectionFactory,
+            IConnectionFactory connectionFactory,
             ILogger<ConsumerBaseService> consumerLogger,
             ILogger<RabbitMqClientBase> logger) :
             base(connectionFactory, logger)

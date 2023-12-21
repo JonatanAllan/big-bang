@@ -1,5 +1,7 @@
+using CaliberFS.Template.Application.Services.RabbitMQ;
 using CaliberFS.Template.Consumer.Configuration;
 using CaliberFS.Template.Consumer.Services;
+using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.IoC.DependencyInjection;
 using RabbitMQ.Client;
 
@@ -13,9 +15,11 @@ public class Startup(IConfiguration configuration)
         services.AddCustomHealthCheck(configuration);
         services.AddCustomSqlServer(configuration);
         services.AddUseCases();
+        services.AddHostedService<SampleConsumerService>();
 
-        services.AddHostedService<LogConsumerService>();
+        // RabbitMQ
         services.AddRabbitMq(configuration);
+        services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

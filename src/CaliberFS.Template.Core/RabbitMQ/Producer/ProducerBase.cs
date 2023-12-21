@@ -14,7 +14,7 @@ namespace CaliberFS.Template.Core.RabbitMQ.Producer
         protected abstract string AppId { get; }
 
         protected ProducerBase(
-            ConnectionFactory connectionFactory,
+            IConnectionFactory connectionFactory,
             ILogger<RabbitMqClientBase> logger,
             ILogger<ProducerBase<T>> producerBaseLogger) :
             base(connectionFactory, logger) => _logger = producerBaseLogger;

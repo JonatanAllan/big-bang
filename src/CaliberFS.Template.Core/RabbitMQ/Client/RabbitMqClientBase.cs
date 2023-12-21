@@ -7,11 +7,11 @@ namespace CaliberFS.Template.Core.RabbitMQ.Client
     {
         protected IModel? Channel { get; private set; }
         private IConnection? _connection;
-        private readonly ConnectionFactory _connectionFactory;
+        private readonly IConnectionFactory _connectionFactory;
         private readonly ILogger<RabbitMqClientBase> _logger;
 
         protected RabbitMqClientBase(
-            ConnectionFactory connectionFactory,
+            IConnectionFactory connectionFactory,
             ILogger<RabbitMqClientBase> logger)
         {
             _connectionFactory = connectionFactory;

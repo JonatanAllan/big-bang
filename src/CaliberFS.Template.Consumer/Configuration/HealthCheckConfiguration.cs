@@ -7,7 +7,8 @@ namespace CaliberFS.Template.Consumer.Configuration
         public static IServiceCollection AddCustomHealthCheck(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHealthChecks()
-                .AddSqlServerHealthCheck();
+                .AddSqlServerHealthCheck()
+                .AddRabbitMQHealthCheck();
             return services;
         }
     }

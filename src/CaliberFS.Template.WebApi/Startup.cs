@@ -2,7 +2,9 @@ using CaliberFS.Template.IoC.DependencyInjection;
 using CaliberFS.Template.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using CaliberFS.Template.Core.RabbitMQ;
+using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.WebApi.Configuration;
+using CaliberFS.Template.Application.Services.RabbitMQ;
 
 namespace CaliberFS.Template.WebApi;
 
@@ -17,6 +19,10 @@ public class Startup(IConfiguration configuration)
         services.AddCustomSqlServer(configuration);
         services.AddUseCases();
         services.AddExceptionHandler<CustomExceptionHandler>();
+
+        // RabbitMQ
+        services.AddRabbitMq(configuration);
+        services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducer>();
     }
 
     public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider, IWebHostEnvironment environment)
