@@ -10,21 +10,21 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["CaliberFS.Template.IoC/CaliberFS.Template.IoC.csproj", "CaliberFS.Template.IoC/"]
-COPY ["CaliberFS.Template.WebApi/CaliberFS.Template.WebApi.csproj", "CaliberFS.Template.WebApi/"]
+COPY ["CaliberFS.Template.Consumer/CaliberFS.Template.Consumer.csproj", "CaliberFS.Template.Consumer/"]
 COPY ["CaliberFS.Template.Application/CaliberFS.Template.Application.csproj", "CaliberFS.Template.Application/"]
 COPY ["CaliberFS.Template.Core/CaliberFS.Template.Core.csproj", "CaliberFS.Template.Core/"]
 COPY ["CaliberFS.Template.Domain/CaliberFS.Template.Domain.csproj", "CaliberFS.Template.Domain/"]
 COPY ["CaliberFS.Template.Data/CaliberFS.Template.Data.csproj", "CaliberFS.Template.Data/"]
-RUN dotnet restore "./CaliberFS.Template.WebApi/./CaliberFS.Template.WebApi.csproj"
+RUN dotnet restore "./CaliberFS.Template.Consumer/./CaliberFS.Template.Consumer.csproj"
 COPY . .
-WORKDIR "/src/CaliberFS.Template.WebApi"
-RUN dotnet build "./CaliberFS.Template.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/CaliberFS.Template.Consumer"
+RUN dotnet build "./CaliberFS.Template.Consumer.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./CaliberFS.Template.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./CaliberFS.Template.Consumer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CaliberFS.Template.WebApi.dll"]
+ENTRYPOINT ["dotnet", "CaliberFS.Template.Consumer.dll"]

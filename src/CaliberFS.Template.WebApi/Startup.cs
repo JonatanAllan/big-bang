@@ -1,54 +1,28 @@
-using CaliberFS.Template.WebApi.Extensions;
+using CaliberFS.Template.IoC.DependencyInjection;
 using CaliberFS.Template.WebApi.Infrastructure;
-using CaliberFS.Template.WebApi.Swagger;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
+using CaliberFS.Template.Core.RabbitMQ;
+using CaliberFS.Template.Core.RabbitMQ.Producer;
+using CaliberFS.Template.WebApi.Configuration;
+using CaliberFS.Template.Application.Services.RabbitMQ;
 
 namespace CaliberFS.Template.WebApi;
 
-public class Startup
+public class Startup(IConfiguration configuration)
 {
-    private readonly IConfiguration _configuration;
-
-    public Startup(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
-        services.AddApiVersioning(options =>
-        {
-            options.ReportApiVersions = true;
-            options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new ApiVersion(1, 0);
-            options.ApiVersionReader = ApiVersionReader.Combine(new HeaderApiVersionReader("x-api-version"));
-        });
-
-        services.AddVersionedApiExplorer(options =>
-        {
-            options.GroupNameFormat = "'v'VVV";
-            options.SubstituteApiVersionInUrl = true;
-        });
-
-        services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-        services.AddSwaggerGen(options =>
-        {
-            options.OperationFilter<SwaggerDefaultValues>();
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            options.DocumentFilter<PathLowercaseDocumentFilter>();
-            options.IncludeXmlComments(xmlPath);
-        });
-
-        services.AddCustomSqlServer(_configuration);
+        services.AddVersionedApi();
+        services.AddSwagger();
+        services.AddCustomHealthCheck(configuration);
+        services.AddCustomSqlServer(configuration);
         services.AddUseCases();
         services.AddExceptionHandler<CustomExceptionHandler>();
+
+        // RabbitMQ
+        services.AddRabbitMq(configuration);
+        services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducer>();
     }
 
     public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider, IWebHostEnvironment environment)
@@ -56,16 +30,7 @@ public class Startup
         if (environment.IsDevelopment())
             app.UseDeveloperExceptionPage();
 
-        app.UseSwagger();
-        app.UseSwaggerUI(options =>
-        {
-            foreach (var description in provider.ApiVersionDescriptions)
-            {
-                var url = $"/swagger/{description.GroupName}/swagger.json";
-                var name = description.GroupName.ToUpperInvariant();
-                options.SwaggerEndpoint(url, name);
-            }
-        });
+        app.UseVersionedSwagger(provider);
         app.UseExceptionHandler(_ => { });
         app.UseRouting();
 
@@ -75,6 +40,7 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseAuthorization();
+        app.UseHealthChecks();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
