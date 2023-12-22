@@ -5,6 +5,7 @@ using CaliberFS.Template.Core.RabbitMQ;
 using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.WebApi.Configuration;
 using CaliberFS.Template.Application.Services.RabbitMQ;
+using CaliberFS.Template.Bootstrapper.DependencyInjection;
 
 namespace CaliberFS.Template.WebApi;
 
@@ -19,6 +20,7 @@ public class Startup(IConfiguration configuration)
         services.AddCustomSqlServer(configuration);
         services.AddUseCases();
         services.AddExceptionHandler<CustomExceptionHandler>();
+        services.ConfigureSerilog(configuration);
 
         // RabbitMQ
         services.AddRabbitMq(configuration);

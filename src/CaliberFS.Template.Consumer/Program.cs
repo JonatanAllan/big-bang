@@ -1,4 +1,5 @@
 using CaliberFS.Template.Bootstrapper.DependencyInjection;
+using Serilog;
 
 namespace CaliberFS.Template.Consumer;
 
@@ -9,6 +10,5 @@ public class Program
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
-        .ConfigureSerilog()
         .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }

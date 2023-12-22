@@ -1,4 +1,5 @@
-﻿using CaliberFS.Template.IoC.DependencyInjection;
+﻿using CaliberFS.Template.Bootstrapper.DependencyInjection;
+using CaliberFS.Template.IoC.DependencyInjection;
 
 namespace CaliberFS.Template.Consumer.Configuration
 {

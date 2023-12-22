@@ -1,4 +1,5 @@
 using CaliberFS.Template.Application.Services.RabbitMQ;
+using CaliberFS.Template.Bootstrapper.DependencyInjection;
 using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.IoC.DependencyInjection;
 using CaliberFS.Template.Worker.Configuration;
@@ -22,6 +23,7 @@ public class Startup(IConfiguration configuration)
         services.AddSingleton<PeriodicHostedService>();
         services.AddHostedService(
             provider => provider.GetRequiredService<PeriodicHostedService>());
+        services.ConfigureSerilog(configuration);
 
         // RabbitMQ
         services.AddRabbitMq(configuration);
