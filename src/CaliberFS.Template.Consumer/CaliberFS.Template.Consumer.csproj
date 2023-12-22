@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CaliberFS.Template.IoC\CaliberFS.Template.IoC.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.IoC\CaliberFS.Template.Bootstrapper.csproj" />
   </ItemGroup>
 
 </Project>

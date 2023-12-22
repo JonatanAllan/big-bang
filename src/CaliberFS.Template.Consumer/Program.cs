@@ -1,3 +1,5 @@
+using CaliberFS.Template.Bootstrapper.DependencyInjection;
+
 namespace CaliberFS.Template.Consumer;
 
 public class Program
@@ -7,5 +9,6 @@ public class Program
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        .ConfigureSerilog()
+        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }

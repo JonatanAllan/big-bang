@@ -34,7 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CaliberFS.Template.Application\CaliberFS.Template.Application.csproj" />
     <ProjectReference Include="..\CaliberFS.Template.Data\CaliberFS.Template.Data.csproj" />
-    <ProjectReference Include="..\CaliberFS.Template.IoC\CaliberFS.Template.IoC.csproj" />
+    <ProjectReference Include="..\CaliberFS.Template.IoC\CaliberFS.Template.Bootstrapper.csproj" />
   </ItemGroup>
 	
 </Project>

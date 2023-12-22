@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Data", "CaliberFS.Template.Data\CaliberFS.Template.Data.csproj", "{1F1881C2-D0D9-4387-9570-A643FF1B3A8D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.IoC", "CaliberFS.Template.IoC\CaliberFS.Template.IoC.csproj", "{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Bootstrapper", "CaliberFS.Template.IoC\CaliberFS.Template.Bootstrapper.csproj", "{C1F49CEA-09AE-4E11-86E2-CCE71F1BA0FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Consumer", "CaliberFS.Template.Consumer\CaliberFS.Template.Consumer.csproj", "{C666B9A9-23A3-444D-AFD6-BD51C4BD52A6}"
 EndProject
