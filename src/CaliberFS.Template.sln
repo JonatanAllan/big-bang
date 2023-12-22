@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.IoC", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Consumer", "CaliberFS.Template.Consumer\CaliberFS.Template.Consumer.csproj", "{C666B9A9-23A3-444D-AFD6-BD51C4BD52A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaliberFS.Template.Worker", "CaliberFS.Template.Worker\CaliberFS.Template.Worker.csproj", "{C3F33C48-97BF-46AF-89C4-E07B97EF4FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliberFS.Template.Worker", "CaliberFS.Template.Worker\CaliberFS.Template.Worker.csproj", "{C3F33C48-97BF-46AF-89C4-E07B97EF4FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
