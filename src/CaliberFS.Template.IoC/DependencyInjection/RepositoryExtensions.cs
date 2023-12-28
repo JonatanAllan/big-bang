@@ -2,6 +2,8 @@
 using CaliberFS.Template.Data.Repositories;
 using CaliberFS.Template.Data.UnitOfWork;
 using CaliberFS.Template.Domain.Interfaces.Repositories;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CaliberFS.Template.WebApi.Extensions
 {

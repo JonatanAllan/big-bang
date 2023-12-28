@@ -4,8 +4,6 @@ using CaliberFS.Template.IoC.DependencyInjection;
 using CaliberFS.Template.Worker.Configuration;
 using CaliberFS.Template.Worker.Options;
 using CaliberFS.Template.Worker.Services;
-using Microsoft.Extensions.DependencyInjection;
-using RabbitMQ.Client;
 
 namespace CaliberFS.Template.Worker;
 

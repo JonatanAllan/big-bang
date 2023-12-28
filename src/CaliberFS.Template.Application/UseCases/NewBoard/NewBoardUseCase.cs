@@ -17,16 +17,16 @@ namespace CaliberFS.Template.Application.UseCases.NewBoard
             await Validate(request);
 
             var board = request.ToEntity();
-            await _boardRepository.AddAsync(board);
+            await boardRepository.AddAsync(board);
 
-            _unitOfWork.Commit();
+            unitOfWork.Commit();
             producer.Publish(new SampleIntegrationEvent(board.Id, "Board created with success."));
             return new NewBoardResponse(board);
         }
 
         private async Task Validate(NewBoardRequest request)
         {
-            var count = await _boardRepository.CountByNameAsync(request.Name);
+            var count = await boardRepository.CountByNameAsync(request.Name);
 
             if (count > 0)
                 throw new ValidationException("Board","Already exists");

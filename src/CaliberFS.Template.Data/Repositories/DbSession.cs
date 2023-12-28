@@ -1,5 +1,6 @@
 ﻿using CaliberFS.Template.Domain.Interfaces.Repositories;
 using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
@@ -15,7 +16,7 @@ namespace CaliberFS.Template.Data.Repositories
 
         public DbSession(IConfiguration configuration)
         {
-            Connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            Connection = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
             Connection.Open();
         }
 

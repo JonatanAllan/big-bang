@@ -1,10 +1,9 @@
+using CaliberFS.Template.Application.Services.RabbitMQ;
+using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.IoC.DependencyInjection;
+using CaliberFS.Template.WebApi.Configuration;
 using CaliberFS.Template.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using CaliberFS.Template.Core.RabbitMQ;
-using CaliberFS.Template.Core.RabbitMQ.Producer;
-using CaliberFS.Template.WebApi.Configuration;
-using CaliberFS.Template.Application.Services.RabbitMQ;
 
 namespace CaliberFS.Template.WebApi;
 

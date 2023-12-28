@@ -3,7 +3,6 @@ using CaliberFS.Template.Consumer.Configuration;
 using CaliberFS.Template.Consumer.Services;
 using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.IoC.DependencyInjection;
-using RabbitMQ.Client;
 
 namespace CaliberFS.Template.Consumer;
 
