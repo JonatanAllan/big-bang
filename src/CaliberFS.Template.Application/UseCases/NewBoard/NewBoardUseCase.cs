@@ -1,15 +1,17 @@
 ﻿using CaliberFS.Template.Application.Common.Exceptions;
+using CaliberFS.Template.Application.Services.RabbitMQ;
 using CaliberFS.Template.Application.Services.UnitOfWork;
+using CaliberFS.Template.Core.RabbitMQ.Producer;
 using CaliberFS.Template.Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace CaliberFS.Template.Application.UseCases.NewBoard
 {
-    public class NewBoardUseCase(IBoardRepository boardRepository, IUnitOfWork unitOfWork) : IRequestHandler<NewBoardRequest, NewBoardResponse>
+    public class NewBoardUseCase(
+        IBoardRepository boardRepository, 
+        IUnitOfWork unitOfWork, 
+        IRabbitMqProducer<SampleIntegrationEvent> producer) : IRequestHandler<NewBoardRequest, NewBoardResponse>
     {
-        private readonly IBoardRepository _boardRepository = boardRepository;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
-
         public async Task<NewBoardResponse> Handle(NewBoardRequest request, CancellationToken cancellationToken)
         {
             await Validate(request);
@@ -18,7 +20,7 @@ namespace CaliberFS.Template.Application.UseCases.NewBoard
             await _boardRepository.AddAsync(board);
 
             _unitOfWork.Commit();
-
+            producer.Publish(new SampleIntegrationEvent(board.Id, "Board created with success."));
             return new NewBoardResponse(board);
         }
 
