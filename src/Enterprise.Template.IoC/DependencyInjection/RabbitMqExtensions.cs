@@ -1,6 +1,4 @@
-﻿using Enterprise.Template.Application.Services.RabbitMQ;
-using Enterprise.Template.Core.RabbitMQ.Producer;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 

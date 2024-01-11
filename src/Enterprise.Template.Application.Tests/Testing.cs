@@ -1,6 +1,5 @@
 ﻿using Enterprise.Template.Application.Tests.Core.Tests;
 using Enterprise.Template.Data.Context;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Template.Application.Tests

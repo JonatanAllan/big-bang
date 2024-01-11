@@ -1,14 +1,19 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using Enterprise.Template.Application.Models.Base;
+using FluentValidation;
+using FluentValidation.Results;
 
-namespace Enterprise.Template.Application.UseCases.NewBoard
+namespace Enterprise.Template.Application.Models.Boards
 {
-    public class NewBoardRequest : IRequest<NewBoardResponse>
+    public class NewBoardRequest : IValidationRequest
     {
         public required string Name { get; set; }
         public string? Description { get; set; }
 
         public Domain.Entities.Board ToEntity() => new(Name, Description);
+        public Task<ValidationResult> Validate()
+        {
+            return new NewBoardRequestValidator().ValidateAsync(this);
+        }
     }
 
     public class NewBoardRequestValidator : AbstractValidator<NewBoardRequest>

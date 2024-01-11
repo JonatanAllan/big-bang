@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
-using MediatR;
 
-namespace Enterprise.Template.Application.UseCases.HandleNewBoard
+namespace Enterprise.Template.Application.Models.Boards
 {
-    public class HandleNewBoardRequest : IRequest<Unit>
+    public class HandleNewBoardRequest
     {
         public Guid CorrelationId { get; set; }
         public int EntityId { get; set; }

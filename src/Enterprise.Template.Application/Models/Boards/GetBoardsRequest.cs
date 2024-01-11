@@ -1,13 +1,13 @@
-﻿using Enterprise.Template.Application.Common.Response;
+﻿using Enterprise.Template.Application.Models.Base;
 using FluentValidation;
-using MediatR;
+using FluentValidation.Results;
 
-namespace Enterprise.Template.Application.UseCases.GetBoards
+namespace Enterprise.Template.Application.Models.Boards
 {
-    public class GetBoardsRequest : IRequest<ApiResponsePagination<GetBoardsResponse>>
+    public class GetBoardsRequest : IValidationRequest
     {
         public string? Name { get; set; }
-        public int Skip { get; set; } = 0;
+        public int Skip { get; set; }
         public int Take { get; set; } = 25;
         public GetBoardsRequest() { }
 
@@ -17,6 +17,11 @@ namespace Enterprise.Template.Application.UseCases.GetBoards
             Skip = skip;
             Take = take;
         }
+
+        public Task<ValidationResult> Validate()
+        {
+            return new GetBoardRequestValidator().ValidateAsync(this);
+        }
     }
 
     public class GetBoardRequestValidator : AbstractValidator<GetBoardsRequest>
@@ -24,7 +29,7 @@ namespace Enterprise.Template.Application.UseCases.GetBoards
         public GetBoardRequestValidator()
         {
             RuleFor(x => x.Skip).GreaterThanOrEqualTo(0);
-            RuleFor(x => x.Take) .GreaterThanOrEqualTo(1);
+            RuleFor(x => x.Take).GreaterThanOrEqualTo(1);
             RuleFor(x => x.Take).LessThanOrEqualTo(50);
             RuleFor(x => x.Name)
                 .MinimumLength(3);

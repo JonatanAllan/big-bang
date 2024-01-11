@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using Enterprise.Template.Application.UseCases.NewBoard;
+using Enterprise.Template.Application.Models.Boards;
 
 namespace Enterprise.Template.Application.Tests.Core.Builders
 {
