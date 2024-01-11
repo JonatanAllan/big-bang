@@ -1,0 +1,12 @@
+@Enterprise.Template.Consumer_HostAddress = https://localhost:7187
+
+GET {{Enterprise.Template.Consumer_HostAddress}}/background/
+Accept: application/json
+###
+
+PATCH {{Enterprise.Template.Consumer_HostAddress}}/background/
+Content-Type: application/json
+
+{
+  "IsEnabled": false
+}
