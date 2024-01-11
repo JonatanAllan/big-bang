@@ -14,7 +14,7 @@ public class Startup(IConfiguration configuration)
         services.AddControllers();
         services.AddCustomHealthCheck(configuration);
         services.AddCustomSqlServer(configuration);
-        services.AddUseCases();
+        services.AddApplications();
         services.AddHostedService<SampleConsumerService>();
 
         // RabbitMQ

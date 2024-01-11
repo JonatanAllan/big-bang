@@ -1,6 +1,6 @@
-﻿using Enterprise.Template.Application.UseCases.PeriodicUseCase;
+﻿using Enterprise.Template.Application.Application;
+using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Worker.Options;
-using MediatR;
 using Microsoft.Extensions.Options;
 
 namespace Enterprise.Template.Worker.Services
@@ -8,7 +8,7 @@ namespace Enterprise.Template.Worker.Services
     public record PeriodicHostedServiceState(bool IsEnabled, DateTime? LastExecution);
 
     internal class PeriodicHostedService(
-        IMediator mediator,
+        ISamplePeriodicApplication samplePeriodicApplication,
         IOptions<PeriodicHostedServiceOptions> options,
         ILogger<PeriodicHostedService> logger) : BackgroundService
     {
@@ -28,7 +28,7 @@ namespace Enterprise.Template.Worker.Services
                 {
                     if (IsEnabled)
                     {
-                        await mediator.Send(new PeriodicUseCaseRequest(), stoppingToken);
+                        await samplePeriodicApplication.DoSomething();
                         _executionCount++;
                         logger.LogInformation(
                             $"Executed PeriodicHostedService - Count: {_executionCount}");

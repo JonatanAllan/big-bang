@@ -1,39 +1,63 @@
-﻿using Enterprise.Template.Application.UseCases.HandleNewBoard;
+﻿using System.Text;
+using Enterprise.Template.Application.Interfaces;
+using Enterprise.Template.Application.Models.Boards;
 using Enterprise.Template.Core.RabbitMQ.Client;
-using Enterprise.Template.Core.RabbitMQ.Consumer;
-using MediatR;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace Enterprise.Template.Consumer.Services
 {
-    public class SampleConsumerService : ConsumerBaseService, IHostedService
+    public class SampleConsumerService : RabbitMqClientBase, IHostedService
     {
-        protected const string VirtualHost = "CUSTOM_HOST";
-        protected readonly string SampleExchange = $"{VirtualHost}.SampleExchange";
-        protected sealed override string QueueName => $"{VirtualHost}.sample.message";
+        protected string VirtualHost => "CUSTOM_HOST";
+        protected string SampleExchange => $"{VirtualHost}.SampleExchange";
+        protected string QueueName => $"{VirtualHost}.sample.message";
         protected const string SampleQueueAndExchangeRoutingKey = "sample.message";
+        private readonly IBoardApplication _boardApplication;
+        private readonly ILogger<SampleConsumerService> _logger;
 
         public SampleConsumerService(
-            IMediator mediator,
+            IBoardApplication boardApplication,
             IConnectionFactory connectionFactory,
-            ILogger<SampleConsumerService> sampleConsumerLogger,
-            ILogger<ConsumerBaseService> consumerLogger,
-            ILogger<RabbitMqClientBase> logger) :
-            base(mediator, connectionFactory, consumerLogger, logger)
+            ILogger<SampleConsumerService> logger,
+            ILogger<RabbitMqClientBase> baseLogger) :
+            base(connectionFactory, baseLogger)
         {
+            _boardApplication = boardApplication;
+            _logger = logger;
             try
             {
                 AddSampleChannel();
                 var consumer = new AsyncEventingBasicConsumer(Channel);
-                consumer.Received += OnEventReceived<HandleNewBoardRequest>;
+                consumer.Received += OnEventReceived;
                 Channel.BasicConsume(queue: QueueName, autoAck: false, consumer: consumer);
             }
             catch (Exception ex)
             {
-                sampleConsumerLogger.LogCritical(ex, "Error while consuming message");
+                logger.LogCritical(ex, "Error while consuming message");
             }
         }
+
+        private async Task OnEventReceived(object sender, BasicDeliverEventArgs @event)
+        {
+            try
+            {
+                var body = Encoding.UTF8.GetString(@event.Body.ToArray());
+                var message = JsonConvert.DeserializeObject<HandleNewBoardRequest>(body)!;
+
+                await _boardApplication.HandleNewBoard(message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical(ex, "Error while retrieving message from queue.");
+            }
+            finally
+            {
+                Channel?.BasicAck(@event.DeliveryTag, false);
+            }
+        }
+
 
         private void AddSampleChannel()
         {

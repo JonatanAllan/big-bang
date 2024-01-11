@@ -17,7 +17,7 @@ public class Startup(IConfiguration configuration)
         services.AddSwagger();
         services.AddCustomHealthCheck(configuration);
         services.AddCustomSqlServer(configuration);
-        services.AddUseCases();
+        services.AddApplications();
         services.AddExceptionHandler<CustomExceptionHandler>();
 
         // RabbitMQ
