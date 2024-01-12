@@ -1,7 +1,9 @@
 ﻿using Enterprise.Template.Application.Common.Exceptions;
+using Enterprise.Template.Application.Interfaces;
+using Enterprise.Template.Application.Models.Boards;
 using Enterprise.Template.Application.Tests.Core.Builders;
 using Enterprise.Template.Application.Tests.Core.Tests;
-using Enterprise.Template.Application.UseCases.GetBoards;
+using Microsoft.Extensions.DependencyInjection;
 using static Enterprise.Template.Application.Tests.Testing;
 
 namespace Enterprise.Template.Application.Tests.Board.UseCases
@@ -12,12 +14,14 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldGetBoardsWithDefaultPagination()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var boards = BoardBuilder.ManyNewBoardEntity(30);
             await AddManyAsync(boards);
             var request = new GetBoardsRequest();
 
             // Act
-            var response = await SendAsync(request);
+            var response = await boardApplication.GetBoards(request);
 
             // Assert
             Assert.Multiple(() =>
@@ -31,9 +35,11 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldGetBoardsWithPagination()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var boards = BoardBuilder.ManyNewBoardEntity(30);
             await AddManyAsync(boards);
-            
+
             var request = new GetBoardsRequest
             {
                 Skip = 10,
@@ -41,7 +47,7 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
             };
 
             // Act
-            var response = await SendAsync(request);
+            var response = await boardApplication.GetBoards(request);
 
             // Assert
             var expected = boards.Skip(10).Take(15).ToList();
@@ -57,6 +63,8 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldGetBoardsWhichNameContains()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var boards = BoardBuilder.ManyNewBoardEntity(30);
             await AddManyAsync(boards);
             var name = boards.First(x => x.Name.Length >= 5).Name;
@@ -66,7 +74,7 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
             };
 
             // Act
-            var response = await SendAsync(request);
+            var response = await boardApplication.GetBoards(request);
 
             // Assert
             var expected = boards.Where(x => x.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -82,13 +90,15 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldFailOnGetBoardsWhenNameIsInvalid()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = new GetBoardsRequest
             {
                 Name = "a"
             };
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.GetBoards(request))
                 .Should().ThrowAsync<ValidationException>();
         }
 
@@ -96,13 +106,15 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldFailOnGetBoardsWhenSkipIsInvalid()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = new GetBoardsRequest
             {
                 Skip = -1
             };
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.GetBoards(request))
                 .Should().ThrowAsync<ValidationException>();
         }
 
@@ -110,13 +122,15 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldFailOnGetBoardsWhenTakeIsInvalid()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = new GetBoardsRequest
             {
                 Take = 0
             };
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.GetBoards(request))
                 .Should().ThrowAsync<ValidationException>();
         }
     }

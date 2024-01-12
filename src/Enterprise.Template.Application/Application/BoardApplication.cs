@@ -2,12 +2,10 @@
 using Enterprise.Template.Application.Common.Exceptions;
 using Enterprise.Template.Application.Services.UnitOfWork;
 using Enterprise.Template.Application.Common.Response;
-using Enterprise.Template.Application.UseCases.GetBoards;
 using Enterprise.Template.Core.Extensions;
 using Enterprise.Template.Domain.Entities;
 using Enterprise.Template.Application.Models.Boards;
 using Enterprise.Template.Application.Services.RabbitMQ;
-using Enterprise.Template.Application.UseCases.NewBoard;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Core.RabbitMQ.Producer;
 
@@ -17,6 +15,10 @@ namespace Enterprise.Template.Application.Application
     {
         public async Task<ApiResponsePagination<GetBoardsResponse>> GetBoards(GetBoardsRequest request)
         {
+            var validation = await request.Validate();
+            if (!validation.IsValid)
+                throw new ValidationException(validation.Errors);
+
             var predicate = PredicateBuilder.True<Board>();
             if (!string.IsNullOrEmpty(request.Name))
                 predicate = predicate.And(s => s.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase));

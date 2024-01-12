@@ -15,9 +15,8 @@ namespace Enterprise.Template.Core.RabbitMQ.Producer
 
         protected ProducerBase(
             IConnectionFactory connectionFactory,
-            ILogger<RabbitMqClientBase> logger,
-            ILogger<ProducerBase<T>> producerBaseLogger) :
-            base(connectionFactory, logger) => _logger = producerBaseLogger;
+            ILogger<ProducerBase<T>> logger) :
+            base(connectionFactory, logger) => _logger = logger;
 
         public virtual void Publish(T @event)
         {

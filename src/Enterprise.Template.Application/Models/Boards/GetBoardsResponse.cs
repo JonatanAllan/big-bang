@@ -1,6 +1,6 @@
 ﻿using Enterprise.Template.Domain.Entities;
 
-namespace Enterprise.Template.Application.UseCases.GetBoards
+namespace Enterprise.Template.Application.Models.Boards
 {
     public class GetBoardsResponse(Board board)
     {

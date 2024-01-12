@@ -11,6 +11,8 @@ namespace Enterprise.Template.Application.Tests
         private static CustomWebApplicationFactory _factory = null!;
         private static IServiceScopeFactory _scopeFactory = null!;
 
+        public static IServiceScopeFactory ScopeFactory => _scopeFactory;
+
         [OneTimeSetUp]
         public async Task RunBeforeAnyTests()
         {
@@ -18,13 +20,6 @@ namespace Enterprise.Template.Application.Tests
             _factory = new CustomWebApplicationFactory();
             _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
             await _database.InitialiseAsync();
-        }
-
-        public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
-        {
-            using var scope = _scopeFactory.CreateScope();
-            var mediator = scope.ServiceProvider.GetService<IMediator>()!;
-            return await mediator.Send(request);
         }
 
         public static async Task AddAsync<TEntity>(TEntity entity)
