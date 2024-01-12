@@ -1,9 +1,9 @@
+using Enterprise.Logging.SDK.Configuration;
 using Enterprise.Template.Application.Services.RabbitMQ;
 using Enterprise.Template.Consumer.Configuration;
 using Enterprise.Template.Consumer.Services;
 using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.IoC.DependencyInjection;
-using RabbitMQ.Client;
 
 namespace Enterprise.Template.Consumer;
 
@@ -26,6 +26,8 @@ public class Startup(IConfiguration configuration)
     {
         if (env.IsDevelopment())
             app.UseDeveloperExceptionPage();
+
+        app.ConfigureLoggingMiddleware();
 
         app.UseHealthChecks();
     }

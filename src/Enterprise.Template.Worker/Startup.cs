@@ -1,11 +1,10 @@
+using Enterprise.Logging.SDK.Configuration;
 using Enterprise.Template.Application.Services.RabbitMQ;
 using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.IoC.DependencyInjection;
 using Enterprise.Template.Worker.Configuration;
 using Enterprise.Template.Worker.Options;
 using Enterprise.Template.Worker.Services;
-using Microsoft.Extensions.DependencyInjection;
-using RabbitMQ.Client;
 
 namespace Enterprise.Template.Worker;
 
@@ -16,7 +15,6 @@ public class Startup(IConfiguration configuration)
         services.AddControllers();
         services.AddCustomHealthCheck(configuration);
         services.AddCustomSqlServer(configuration);
-        services.AddUseCases();
 
         services.Configure<PeriodicHostedServiceOptions>(configuration.GetSection("PeriodicService"));
         services.AddSingleton<PeriodicHostedService>();
@@ -33,6 +31,8 @@ public class Startup(IConfiguration configuration)
     {
         if (env.IsDevelopment())
             app.UseDeveloperExceptionPage();
+
+        app.ConfigureLoggingMiddleware();
 
         app.UseRouting();
         app.UseHealthChecks();
