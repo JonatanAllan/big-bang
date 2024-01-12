@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Template.Application.UseCases.NewBoard
+﻿namespace Enterprise.Template.Application.Models.Boards
 {
     public class NewBoardResponse(Domain.Entities.Board board)
     {

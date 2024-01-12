@@ -1,6 +1,8 @@
 ﻿using Enterprise.Template.Application.Common.Exceptions;
+using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Tests.Core.Builders;
 using Enterprise.Template.Application.Tests.Core.Tests;
+using Microsoft.Extensions.DependencyInjection;
 using static Enterprise.Template.Application.Tests.Testing;
 
 namespace Enterprise.Template.Application.Tests.Board.UseCases
@@ -11,10 +13,12 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldCreateANewBoard()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = BoardBuilder.BuildNewBoardRequest();
 
             // Act
-            var response = await SendAsync(request);
+            var response = await boardApplication.CreateBoard(request);
 
             // Assert
             Assert.Multiple(() =>
@@ -29,11 +33,13 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldNotCreateANewBoardWhenNameAlreadyExists()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = BoardBuilder.BuildNewBoardRequest();
-            await SendAsync(request);
+            await boardApplication.CreateBoard(request);
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.CreateBoard(request))
                 .Should().ThrowAsync<ValidationException>();
         }
 
@@ -41,11 +47,13 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldNotCreateANewBoardWhenNameIsEmpty()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = BoardBuilder.BuildNewBoardRequest();
             request.Name = string.Empty;
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.CreateBoard(request))
                 .Should().ThrowAsync<ValidationException>();
         }
 
@@ -53,11 +61,13 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldNotCreateANewBoardWhenNameIsGreaterThan50Characters()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = BoardBuilder.BuildNewBoardRequest();
             request.Name = new string('a', 51);
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.CreateBoard(request))
                 .Should().ThrowAsync<ValidationException>();
         }
 
@@ -65,11 +75,13 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
         public async Task ShouldNotCreateANewBoardWhenDescriptionIsGreaterThan500Characters()
         {
             // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
             var request = BoardBuilder.BuildNewBoardRequest();
             request.Description = new string('a', 501);
 
             // Act & Assert
-            await FluentActions.Invoking(() => SendAsync(request))
+            await FluentActions.Invoking(() => boardApplication.CreateBoard(request))
                 .Should().ThrowAsync<ValidationException>();
         }
     }

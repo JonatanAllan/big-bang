@@ -1,8 +1,6 @@
 ﻿using Enterprise.Template.Application.Common.Response;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
-using Enterprise.Template.Application.UseCases.GetBoards;
-using Enterprise.Template.Application.UseCases.NewBoard;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Enterprise.Template.WebApi.Controllers.V1

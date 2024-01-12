@@ -9,9 +9,8 @@ namespace Enterprise.Template.Application.Services.RabbitMQ
     {
         public SampleProducer(
             IConnectionFactory connectionFactory,
-            ILogger<RabbitMqClientBase> logger,
-            ILogger<ProducerBase<SampleIntegrationEvent>> producerBaseLogger) :
-            base(connectionFactory, logger, producerBaseLogger)
+            ILogger<SampleProducer> logger) :
+            base(connectionFactory, logger)
         {
         }
 

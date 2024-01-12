@@ -1,4 +1,12 @@
-﻿using Enterprise.Template.Data.Context;
+﻿using Enterprise.Template.Application.Services.RabbitMQ;
+using Enterprise.Template.Application.Services.UnitOfWork;
+using Enterprise.Template.Application.Tests.Core.Fakes;
+using Enterprise.Template.Core.RabbitMQ.Producer;
+using Enterprise.Template.Data.Context;
+using Enterprise.Template.Data.Repositories;
+using Enterprise.Template.Data.UnitOfWork;
+using Enterprise.Template.Domain.Interfaces.Repositories;
+using Enterprise.Template.IoC.DependencyInjection;
 using Enterprise.Template.WebApi;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -23,6 +31,13 @@ namespace Enterprise.Template.Application.Tests.Core.Tests
                         options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                         options.UseInMemoryDatabase("sample");
                     });
+
+                services.AddScoped<IUnitOfWork, UnitOfWork>();
+                services.AddScoped<IBoardRepository, BoardRepository>();
+
+                services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducerFake>();
+
+                services.AddApplications();
             });
         }
     }
