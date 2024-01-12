@@ -8,12 +8,14 @@ namespace Enterprise.Template.WebApi.Controllers.V1
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
-    public sealed class BoardController(IBoardApplication boardApplication) : ControllerBase
+    public sealed class BoardController(IBoardApplication boardApplication, ILogger<BoardController> logger) : ControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponsePagination<GetBoardsResponse>))]
         public async Task<IActionResult> Get([FromQuery] GetBoardsRequest request)
         {
+            logger.LogInformation("Get boards");
+
             var response = await boardApplication.GetBoards(request);
             return Ok(response);
         }

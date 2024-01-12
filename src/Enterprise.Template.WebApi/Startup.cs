@@ -1,10 +1,10 @@
+using Enterprise.Logging.SDK.Configuration;
+using Enterprise.Template.Application.Services.RabbitMQ;
+using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.IoC.DependencyInjection;
+using Enterprise.Template.WebApi.Configuration;
 using Enterprise.Template.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Enterprise.Template.Core.RabbitMQ;
-using Enterprise.Template.Core.RabbitMQ.Producer;
-using Enterprise.Template.WebApi.Configuration;
-using Enterprise.Template.Application.Services.RabbitMQ;
 
 namespace Enterprise.Template.WebApi;
 
@@ -23,12 +23,15 @@ public class Startup(IConfiguration configuration)
         // RabbitMQ
         services.AddRabbitMq(configuration);
         services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducer>();
+
     }
 
     public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider, IWebHostEnvironment environment)
     {
         if (environment.IsDevelopment())
             app.UseDeveloperExceptionPage();
+
+        app.ConfigureLoggingMiddleware();
 
         app.UseVersionedSwagger(provider);
         app.UseExceptionHandler(_ => { });
