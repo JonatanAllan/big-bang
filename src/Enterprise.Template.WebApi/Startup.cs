@@ -1,6 +1,4 @@
 using Enterprise.Logging.SDK.Configuration;
-using Enterprise.Template.Application.Services.RabbitMQ;
-using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.IoC.DependencyInjection;
 using Enterprise.Template.WebApi.Configuration;
 using Enterprise.Template.WebApi.Infrastructure;
@@ -22,8 +20,6 @@ public class Startup(IConfiguration configuration)
 
         // RabbitMQ
         services.AddRabbitMq(configuration);
-        services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducer>();
-
     }
 
     public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider, IWebHostEnvironment environment)
