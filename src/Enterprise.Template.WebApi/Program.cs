@@ -1,7 +1,9 @@
 using Enterprise.Configuration.Extensions;
+using Enterprise.GenericRepository.Configuration;
 using Enterprise.Logging.Models;
 using Enterprise.Logging.SDK.Configuration;
 using Enterprise.RabbitMQ.Models;
+using Enterprise.Template.IoC;
 using Enterprise.Template.IoC.DependencyInjection;
 using Serilog;
 
@@ -16,8 +18,13 @@ public class Program
     Host.CreateDefaultBuilder(args)
         .ConfigureServices((hostContext, services) =>
         {
+            services.AddConfiguration<AppSettings>(hostContext, "AppSettings");
             services.AddConfiguration<RabbitMQSettings>(hostContext, "RabbitMQSettings");
             services.AddLoggingSDK(hostContext);
+
+            var appSettings = hostContext.GetConfigurationSection<AppSettings>(nameof(AppSettings));
+            services.ConfigureDatabaseConnections(appSettings.ConnectionStrings);
+
         })
         .UseSerilog((hostContext, services, loggerConfiguration) =>
         {
