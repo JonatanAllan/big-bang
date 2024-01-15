@@ -1,7 +1,6 @@
-﻿using Enterprise.Template.Application.Services.RabbitMQ;
+﻿using Enterprise.PubSub.Interfaces;
 using Enterprise.Template.Application.Services.UnitOfWork;
 using Enterprise.Template.Application.Tests.Core.Fakes;
-using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.Data.Context;
 using Enterprise.Template.Data.Repositories;
 using Enterprise.Template.Data.UnitOfWork;
@@ -35,7 +34,7 @@ namespace Enterprise.Template.Application.Tests.Core.Tests
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
                 services.AddScoped<IBoardRepository, BoardRepository>();
 
-                services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducerFake>();
+                services.AddSingleton<IPublisherService, PublisherServiceFake>();
 
                 services.AddApplications();
             });

@@ -1,17 +1,24 @@
-﻿using Enterprise.Template.Domain.Interfaces.Repositories;
+﻿using Enterprise.Operations;
+using Enterprise.PubSub.Enums;
+using Enterprise.Template.Domain.Interfaces.Repositories;
 using Enterprise.Template.Application.Common.Exceptions;
 using Enterprise.Template.Application.Services.UnitOfWork;
 using Enterprise.Template.Application.Common.Response;
 using Enterprise.Template.Core.Extensions;
 using Enterprise.Template.Domain.Entities;
 using Enterprise.Template.Application.Models.Boards;
-using Enterprise.Template.Application.Services.RabbitMQ;
 using Enterprise.Template.Application.Interfaces;
-using Enterprise.Template.Core.RabbitMQ.Producer;
+using Enterprise.PubSub.Interfaces;
+using Enterprise.Template.Domain.Constants;
+using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Template.Application.Application
 {
-    public class BoardApplication(IBoardRepository boardRepository, IUnitOfWork unitOfWork, IRabbitMqProducer<SampleIntegrationEvent> producer) : IBoardApplication
+    public class BoardApplication(
+        ILogger<BoardApplication> logger,
+        IBoardRepository boardRepository, 
+        IUnitOfWork unitOfWork,
+        IPublisherService publisherService) : IBoardApplication
     {
         public async Task<ApiResponsePagination<GetBoardsResponse>> GetBoards(GetBoardsRequest request)
         {
@@ -35,13 +42,16 @@ namespace Enterprise.Template.Application.Application
             var board = request.ToEntity();
             await boardRepository.AddAsync(board);
             unitOfWork.SaveChanges();
-            producer.Publish(new SampleIntegrationEvent(board.Id, "Board created with success."));
+            var message = new HandleNewBoardRequest(board.Id,$"{board.Name} created");
+            var result = await publisherService.PublishMessageAsync(message, PublishType.Queue, Queues.SampleMessage);
+            if (result.Failed)
+                logger.LogError(result.Message);
             return new NewBoardResponse(board);
         }
 
-        public Task HandleNewBoard(HandleNewBoardRequest request)
+        public async Task<OperationResult> HandleNewBoard(HandleNewBoardRequest request)
         {
-           return Task.CompletedTask;
+           return await Task.FromResult(OperationResult.Ok());
         }
 
         private async Task Validate(NewBoardRequest request)

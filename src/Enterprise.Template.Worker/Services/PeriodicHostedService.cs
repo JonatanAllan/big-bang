@@ -1,5 +1,4 @@
-﻿using Enterprise.Template.Application.Application;
-using Enterprise.Template.Application.Interfaces;
+﻿using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Worker.Options;
 using Microsoft.Extensions.Options;
 
@@ -8,7 +7,7 @@ namespace Enterprise.Template.Worker.Services
     public record PeriodicHostedServiceState(bool IsEnabled, DateTime? LastExecution);
 
     internal class PeriodicHostedService(
-        ISamplePeriodicApplication samplePeriodicApplication,
+        IServiceProvider serviceProvider,
         IOptions<PeriodicHostedServiceOptions> options,
         ILogger<PeriodicHostedService> logger) : BackgroundService
     {
@@ -20,6 +19,8 @@ namespace Enterprise.Template.Worker.Services
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             using var timer = new PeriodicTimer(_period);
+            using var scope = serviceProvider.CreateScope();
+            var samplePeriodicApplication = scope.ServiceProvider.GetRequiredService<ISamplePeriodicApplication>();
             while (
                 !stoppingToken.IsCancellationRequested &&
                 await timer.WaitForNextTickAsync(stoppingToken))

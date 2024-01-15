@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Enterprise.PubSub" Version="4.0.4" />
     <PackageReference Include="FluentValidation" Version="11.8.1" />
   </ItemGroup>
 
