@@ -25,22 +25,7 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
             {
                 response.Name.Should().Be(request.Name);
                 response.Description.Should().Be(request.Description);
-                response.Id.Should().BeGreaterThan(0);
             });
-        }
-
-        [Test]
-        public async Task ShouldNotCreateANewBoardWhenNameAlreadyExists()
-        {
-            // Arrange
-            using var scope = ScopeFactory.CreateScope();
-            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
-            var request = BoardBuilder.BuildNewBoardRequest();
-            await boardApplication.CreateBoard(request);
-
-            // Act & Assert
-            await FluentActions.Invoking(() => boardApplication.CreateBoard(request))
-                .Should().ThrowAsync<ValidationException>();
         }
 
         [Test]

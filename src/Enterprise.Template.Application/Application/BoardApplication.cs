@@ -1,23 +1,19 @@
 ﻿using Enterprise.Operations;
 using Enterprise.PubSub.Enums;
-using Enterprise.Template.Domain.Interfaces.Repositories;
-using Enterprise.Template.Application.Common.Exceptions;
-using Enterprise.Template.Application.Services.UnitOfWork;
-using Enterprise.Template.Application.Common.Response;
-using Enterprise.Template.Core.Extensions;
-using Enterprise.Template.Domain.Entities;
-using Enterprise.Template.Application.Models.Boards;
-using Enterprise.Template.Application.Interfaces;
 using Enterprise.PubSub.Interfaces;
+using Enterprise.Template.Application.Common.Exceptions;
+using Enterprise.Template.Application.Common.Response;
+using Enterprise.Template.Application.Interfaces;
+using Enterprise.Template.Application.Models.Boards;
 using Enterprise.Template.Domain.Constants;
+using Enterprise.Template.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Template.Application.Application
 {
     public class BoardApplication(
         ILogger<BoardApplication> logger,
-        IBoardRepository boardRepository, 
-        IUnitOfWork unitOfWork,
+        IBoardRepository boardRepository,
         IPublisherService publisherService) : IBoardApplication
     {
         public async Task<ApiResponsePagination<GetBoardsResponse>> GetBoards(GetBoardsRequest request)
@@ -26,12 +22,9 @@ namespace Enterprise.Template.Application.Application
             if (!validation.IsValid)
                 throw new ValidationException(validation.Errors);
 
-            var predicate = PredicateBuilder.True<Board>();
-            if (!string.IsNullOrEmpty(request.Name))
-                predicate = predicate.And(s => s.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase));
+            var boards = await boardRepository.GetManyAsync(request.Name, request.Skip, request.Take);
+            var total = await boardRepository.CountAsync(request.Name);
 
-            var boards = await boardRepository.GetManyAsync(predicate, request.Skip, request.Take);
-            var total = await boardRepository.CountAsync(predicate);
             var items = boards.Select(s => new GetBoardsResponse(s)).ToList();
             return new ApiResponsePagination<GetBoardsResponse>(items, total);
         }
@@ -40,12 +33,15 @@ namespace Enterprise.Template.Application.Application
         {
             await Validate(request);
             var board = request.ToEntity();
+            
             await boardRepository.AddAsync(board);
-            unitOfWork.SaveChanges();
+
             var message = new HandleNewBoardRequest(board.Id,$"{board.Name} created");
             var result = await publisherService.PublishMessageAsync(message, PublishType.Queue, Queues.SampleMessage);
+
             if (result.Failed)
                 logger.LogError(result.Message);
+
             return new NewBoardResponse(board);
         }
 
@@ -57,10 +53,12 @@ namespace Enterprise.Template.Application.Application
         private async Task Validate(NewBoardRequest request)
         {
             var validation = await request.Validate();
-            if(!validation.IsValid)
+
+            if (!validation.IsValid)
                 throw new ValidationException(validation.Errors);
 
-            var boardExists = await boardRepository.ExistsAsync(x => x.Name.Equals(request.Name, StringComparison.InvariantCulture));
+            var boardExists = await boardRepository.ExistsAsync(request.Name);
+
             if (boardExists)
                 throw new ValidationException("Board", "Already exists");
         }

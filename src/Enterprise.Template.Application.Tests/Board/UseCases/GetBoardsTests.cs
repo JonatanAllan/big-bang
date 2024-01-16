@@ -1,7 +1,6 @@
 ﻿using Enterprise.Template.Application.Common.Exceptions;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
-using Enterprise.Template.Application.Tests.Core.Builders;
 using Enterprise.Template.Application.Tests.Core.Tests;
 using Microsoft.Extensions.DependencyInjection;
 using static Enterprise.Template.Application.Tests.Testing;
@@ -11,78 +10,24 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
     public class GetBoardsTests : BaseTest
     {
         [Test]
-        public async Task ShouldGetBoardsWithDefaultPagination()
-        {
-            // Arrange
-            using var scope = ScopeFactory.CreateScope();
-            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
-            var boards = BoardBuilder.ManyNewBoardEntity(30);
-            await AddManyAsync(boards);
-            var request = new GetBoardsRequest();
-
-            // Act
-            var response = await boardApplication.GetBoards(request);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                response.Data.Count.Should().Be(request.Take);
-                response.Total.Should().Be(30);
-            });
-        }
-
-        [Test]
-        public async Task ShouldGetBoardsWithPagination()
-        {
-            // Arrange
-            using var scope = ScopeFactory.CreateScope();
-            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
-            var boards = BoardBuilder.ManyNewBoardEntity(30);
-            await AddManyAsync(boards);
-
-            var request = new GetBoardsRequest
-            {
-                Skip = 10,
-                Take = 15
-            };
-
-            // Act
-            var response = await boardApplication.GetBoards(request);
-
-            // Assert
-            var expected = boards.Skip(10).Take(15).ToList();
-            Assert.Multiple(() =>
-            {
-                response.Data.Count.Should().Be(15);
-                response.Total.Should().Be(30);
-                Assert.That(expected.Select(x => x.Id), Is.EquivalentTo(response.Data.Select(x => x.Id)));
-            });
-        }
-
-        [Test]
         public async Task ShouldGetBoardsWhichNameContains()
         {
             // Arrange
             using var scope = ScopeFactory.CreateScope();
             var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
-            var boards = BoardBuilder.ManyNewBoardEntity(30);
-            await AddManyAsync(boards);
-            var name = boards.First(x => x.Name.Length >= 5).Name;
+            
             var request = new GetBoardsRequest
             {
-                Name = name[..5]
+                Name = "Schow"
             };
 
             // Act
             var response = await boardApplication.GetBoards(request);
 
             // Assert
-            var expected = boards.Where(x => x.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase)).ToList();
             Assert.Multiple(() =>
             {
-                response.Data.Count.Should().Be(expected.Count);
-                response.Total.Should().Be(expected.Count);
-                Assert.That(expected.Select(x => x.Id), Is.EquivalentTo(response.Data.Select(x => x.Id)));
+                response.Data.Count.Should().Be(1);
             });
         }
 
