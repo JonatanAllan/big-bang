@@ -1,13 +1,12 @@
 ﻿using Enterprise.Operations;
 using Enterprise.PubSub.Enums;
-using Enterprise.Template.Domain.Interfaces.Repositories;
+using Enterprise.PubSub.Interfaces;
 using Enterprise.Template.Application.Common.Exceptions;
 using Enterprise.Template.Application.Common.Response;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
-using Enterprise.Template.Application.Interfaces;
-using Enterprise.PubSub.Interfaces;
 using Enterprise.Template.Domain.Constants;
+using Enterprise.Template.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Template.Application.Application
@@ -34,12 +33,15 @@ namespace Enterprise.Template.Application.Application
         {
             await Validate(request);
             var board = request.ToEntity();
+            
             await boardRepository.AddAsync(board);
 
             var message = new HandleNewBoardRequest(board.Id,$"{board.Name} created");
             var result = await publisherService.PublishMessageAsync(message, PublishType.Queue, Queues.SampleMessage);
+
             if (result.Failed)
                 logger.LogError(result.Message);
+
             return new NewBoardResponse(board);
         }
 

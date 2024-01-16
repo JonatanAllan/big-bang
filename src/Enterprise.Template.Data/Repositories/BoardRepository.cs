@@ -1,6 +1,7 @@
 ﻿using Enterprise.GenericRepository.Interfaces;
 using Enterprise.Template.Domain.Entities;
 using Enterprise.Template.Domain.Interfaces.Repositories;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Enterprise.Template.Data.Repositories
 {
@@ -35,7 +36,7 @@ namespace Enterprise.Template.Data.Repositories
             var query = "select Count(*) from Board where UPPER([Name]) = @Name";
             var parameters = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("Name", name)
+                new KeyValuePair<string, object>("Name", name.ToUpper())
             };
 
             var result = await _genericRepository.GetSingleAsync<int>(query, System.Data.CommandType.Text, parameters);
@@ -48,10 +49,10 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task<IEnumerable<Board>> GetManyAsync(string name, int skip, int take)
         {
-            var query = "select * from Board where UPPER([Name]) = @Name";
+            var query = "select * from Board where UPPER([Name]) like @Name";
             var parameters = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("Name", name)
+                new KeyValuePair<string, object>("Name", "%" + name.ToUpper() + "%")
             };
 
             var result = await _genericRepository.GetAllAsync<Board>(query, System.Data.CommandType.Text, parameters);
@@ -64,10 +65,10 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task<int> CountAsync(string name)
         {
-            var query = "select Count(*) from Board where UPPER([Name]) = @Name";
+            var query = "select Count(*) from Board where UPPER([Name]) like @Name";
             var parameters = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("Name", name)
+                new KeyValuePair<string, object>("Name", "%" + name.ToUpper() + "%")
             };
 
             var result = await _genericRepository.GetSingleAsync<int>(query, System.Data.CommandType.Text, parameters);

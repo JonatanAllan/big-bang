@@ -6,7 +6,6 @@ using Enterprise.Template.Application.Tests.Core.Fakes;
 using Enterprise.Template.Data.Context;
 using Enterprise.Template.Data.Repositories;
 using Enterprise.Template.Data.UnitOfWork;
-using Enterprise.Template.Domain.Entities;
 using Enterprise.Template.Domain.Interfaces.Repositories;
 using Enterprise.Template.IoC.DependencyInjection;
 using Enterprise.Template.WebApi;
