@@ -3,7 +3,6 @@ using Enterprise.Template.Application.Common.Response;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
 using Enterprise.Template.Application.Services.RabbitMQ;
-using Enterprise.Template.Application.Services.UnitOfWork;
 using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.Domain.Interfaces.Repositories;
 
