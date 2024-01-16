@@ -2,11 +2,11 @@
 
 namespace Enterprise.Template.Application.Models.Boards
 {
-    public class HandleNewBoardRequest
+    public class HandleNewBoardRequest(int entityId, string? message)
     {
-        public Guid CorrelationId { get; set; }
-        public int EntityId { get; set; }
-        public string? Message { get; set; }
+        public Guid CorrelationId { get; set; } = Guid.NewGuid();
+        public int EntityId { get; set; } = entityId;
+        public string? Message { get; set; } = message;
     }
 
     public class HandleNewBoardRequestValidator : AbstractValidator<HandleNewBoardRequest>

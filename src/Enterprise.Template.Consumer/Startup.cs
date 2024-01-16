@@ -1,8 +1,6 @@
 using Enterprise.Logging.SDK.Configuration;
-using Enterprise.Template.Application.Services.RabbitMQ;
 using Enterprise.Template.Consumer.Configuration;
 using Enterprise.Template.Consumer.Services;
-using Enterprise.Template.Core.RabbitMQ.Producer;
 using Enterprise.Template.IoC.DependencyInjection;
 
 namespace Enterprise.Template.Consumer;
@@ -15,11 +13,10 @@ public class Startup(IConfiguration configuration)
         services.AddCustomHealthCheck(configuration);
         services.AddCustomSqlServer(configuration);
         services.AddApplications();
-        services.AddHostedService<SampleConsumerService>();
+        services.AddHostedService<CustomService>();
 
         // RabbitMQ
         services.AddRabbitMq(configuration);
-        services.AddSingleton<IRabbitMqProducer<SampleIntegrationEvent>, SampleProducer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
