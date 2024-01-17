@@ -4,7 +4,6 @@ using Enterprise.RabbitMQ.BaseClasses;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
 using Enterprise.Template.Domain.Constants;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace Enterprise.Template.Consumer.Services

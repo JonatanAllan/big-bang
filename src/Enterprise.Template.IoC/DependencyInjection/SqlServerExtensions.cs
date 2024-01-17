@@ -1,9 +1,6 @@
-﻿using Enterprise.Template.Application.Services.UnitOfWork;
-using Enterprise.Template.Data.Context;
+﻿using Enterprise.Template.Data;
 using Enterprise.Template.Data.Repositories;
-using Enterprise.Template.Data.UnitOfWork;
 using Enterprise.Template.Domain.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,27 +8,28 @@ namespace Enterprise.Template.IoC.DependencyInjection
 {
     public static class SqlServerExtensions
     {
-        public static IServiceCollection AddCustomSqlServer(
+        public static IServiceCollection AddRepositories(
             this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddDbContext<AppDbContext>(
-            //    options => options.UseSqlServer(
-            //        configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("sample"));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBoardRepository, BoardRepository>();
-
             return services;
         }
 
-        public static IHealthChecksBuilder AddSqlServerHealthCheck(
-            this IHealthChecksBuilder healthChecksBuilder)
+        public static IHealthChecksBuilder AddSqlServerHealthChecks(
+            this IHealthChecksBuilder healthChecksBuilder, IConfiguration configuration)
         {
             healthChecksBuilder
-                .AddDbContextCheck<AppDbContext>("Sql Server", customTestQuery: async (db, cancel) => await db.Boards.AnyAsync(cancellationToken: cancel));
-
+                .AddSqlServer(connectionString: GetConnectionByName(ConnectionStrings.TemplateApp, configuration),  name: "Sql Server A");
             return healthChecksBuilder;
         }
+
+        private static string GetConnectionByName(string name, IConfiguration configuration)
+        {
+           var connections =  configuration.GetSection("AppSettings:ConnectionStrings").Get<List<ConnectionItem>>()!;
+           return connections.FirstOrDefault(x => x.Name == name)?.ConnectionString;
+        }
+        
     }
+
+    record ConnectionItem(string Name, string ConnectionString);
 }

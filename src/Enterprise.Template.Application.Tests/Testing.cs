@@ -1,5 +1,4 @@
 ﻿using Enterprise.Template.Application.Tests.Core.Tests;
-using Enterprise.Template.Data.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Template.Application.Tests
@@ -20,24 +19,6 @@ namespace Enterprise.Template.Application.Tests
             _factory = new CustomWebApplicationFactory();
             _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
             await _database.InitialiseAsync();
-        }
-
-        public static async Task AddAsync<TEntity>(TEntity entity)
-            where TEntity : class
-        {
-            using var scope = _scopeFactory.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            context.Add(entity);
-            await context.SaveChangesAsync();
-        }
-
-        public static async Task AddManyAsync<TEntity>(List<TEntity> entities)
-            where TEntity : class
-        {
-            using var scope = _scopeFactory.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            context.AddRange(entities);
-            await context.SaveChangesAsync();
         }
 
         public static async Task ResetState()
