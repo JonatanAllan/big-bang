@@ -8,5 +8,5 @@ PATCH {{Enterprise.Template.Consumer_HostAddress}}/background/
 Content-Type: application/json
 
 {
-  "IsEnabled": false
+  "IsEnabled": true
 }

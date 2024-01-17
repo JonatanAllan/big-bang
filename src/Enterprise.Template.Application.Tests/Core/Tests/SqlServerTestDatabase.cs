@@ -1,30 +1,17 @@
-﻿using Enterprise.Template.Data.Context;
-using Microsoft.EntityFrameworkCore;
-
-namespace Enterprise.Template.Application.Tests.Core.Tests
+﻿namespace Enterprise.Template.Application.Tests.Core.Tests
 {
     public class SqlServerTestDatabase : ITestDatabase
     {
-        private AppDbContext _context = null!;
-        private const string DatabaseName = "sample";
+        private const string DatabaseName = "Enterprise";
 
         public async Task InitialiseAsync()
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(DatabaseName)
-            .Options;
-
-            _context = new AppDbContext(options);
-
-            if (_context.Database.IsRelational())
-                await _context.Database.MigrateAsync();
-
-            await _context.Database.EnsureCreatedAsync();
+            // Todo: Initialize database
         }
 
         public async Task ResetAsync()
         {
-            await _context.Database.EnsureDeletedAsync();
+            // Todo: Clear database
         }
 
         private void SeedData()

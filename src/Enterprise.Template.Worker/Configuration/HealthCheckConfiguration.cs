@@ -7,8 +7,8 @@ namespace Enterprise.Template.Worker.Configuration
         public static IServiceCollection AddCustomHealthCheck(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHealthChecks()
-                .AddSqlServerHealthCheck()
-                .AddRabbitMQHealthCheck();
+                .AddRabbitMQHealthCheck()
+                .AddSqlServerHealthChecks(configuration);
             return services;
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Enterprise.GenericRepository.Interfaces;
 using Enterprise.Template.Domain.Entities;
 using Enterprise.Template.Domain.Interfaces.Repositories;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Enterprise.Template.Data.Repositories
 {
@@ -16,13 +15,13 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task AddAsync(Board entity)
         {
-            var spName = "usp_AddNewBoard";
+            const string spName = "usp_AddNewBoard";
             var parameters = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("Name", entity.Name),
-                new KeyValuePair<string, object>("Description", entity.Description),
-                new KeyValuePair<string, object>("CreatedAt", entity.CreatedAt),
-                new KeyValuePair<string, object>("LastUpdatedAt", entity.LastUpdatedAt)
+                new("Name", entity.Name),
+                new("Description", entity.Description),
+                new("CreatedAt", entity.CreatedAt),
+                new("LastUpdatedAt", entity.LastUpdatedAt)
             };
 
             var result = await _genericRepository.ExecuteAsync(spName, parameters);
@@ -33,10 +32,10 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task<bool> ExistsAsync(string name)
         {
-            var query = "select Count(*) from Board where UPPER([Name]) = @Name";
+            const string query = "select Count(*) from Board where UPPER([Name]) = @Name";
             var parameters = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("Name", name.ToUpper())
+                new("Name", name.ToUpper())
             };
 
             var result = await _genericRepository.GetSingleAsync<int>(query, System.Data.CommandType.Text, parameters);
@@ -49,11 +48,10 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task<IEnumerable<Board>> GetManyAsync(string name, int skip, int take)
         {
-            var query = "select * from Board where UPPER([Name]) like @Name";
-            var parameters = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("Name", "%" + name.ToUpper() + "%")
-            };
+            const string query = "select * from Board where UPPER([Name]) like @Name";
+            var parameters = new List<KeyValuePair<string, object>>();
+            if (!string.IsNullOrEmpty(name))
+                parameters.Add(new("Name", "%" + name.ToUpper() + "%"));
 
             var result = await _genericRepository.GetAllAsync<Board>(query, System.Data.CommandType.Text, parameters);
 
@@ -65,10 +63,10 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task<int> CountAsync(string name)
         {
-            var query = "select Count(*) from Board where UPPER([Name]) like @Name";
+            const string query = "select Count(*) from Board where UPPER([Name]) like @Name";
             var parameters = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("Name", "%" + name.ToUpper() + "%")
+                new("Name", "%" + name.ToUpper() + "%")
             };
 
             var result = await _genericRepository.GetSingleAsync<int>(query, System.Data.CommandType.Text, parameters);

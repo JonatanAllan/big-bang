@@ -36,7 +36,7 @@ namespace Enterprise.Template.Application.Application
             
             await boardRepository.AddAsync(board);
 
-            var message = new HandleNewBoardRequest(board.Id,$"{board.Name} created");
+            var message = new HandleNewBoardRequest(board.Id, $"{board.Name} created");
             var result = await publisherService.PublishMessageAsync(message, PublishType.Queue, Queues.SampleMessage);
 
             if (result.Failed)
