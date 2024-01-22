@@ -1,4 +1,5 @@
-﻿using Enterprise.Template.Application.Common.Response;
+﻿using Asp.Versioning;
+using Enterprise.Template.Application.Common.Response;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
 using Microsoft.AspNetCore.Mvc;

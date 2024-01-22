@@ -1,3 +1,4 @@
+using Asp.Versioning.ApiExplorer;
 using Enterprise.Configuration.Extensions;
 using Enterprise.GenericRepository.Configuration;
 using Enterprise.Logging.Models;

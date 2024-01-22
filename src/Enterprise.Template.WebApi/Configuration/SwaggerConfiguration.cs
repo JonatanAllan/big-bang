@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
+using Asp.Versioning.ApiExplorer;
 using Enterprise.Template.WebApi.Swagger;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
