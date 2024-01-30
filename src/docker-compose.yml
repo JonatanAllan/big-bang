@@ -7,6 +7,18 @@ services:
       context: .
       dockerfile: Enterprise.Template.WebApi/Dockerfile
 
+  enterprise.template.consumer:
+    image: ${DOCKER_REGISTRY-}enterprisetemplateconsumer
+    build:
+      context: .
+      dockerfile: Enterprise.Template.Consumer/Dockerfile
+
+  enterprise.template.worker:
+    image: ${DOCKER_REGISTRY-}enterprisetemplateworker
+    build:
+      context: .
+      dockerfile: Enterprise.Template.Worker/Dockerfile
+
   messaging-logging-service:
     image: sdevcontimages.azurecr.io/messaging-logging:latest
     container_name: messaging-logging
@@ -44,3 +56,5 @@ services:
 volumes:
   rabbitmq-data:
   rabbitmq-logs:
+
+
