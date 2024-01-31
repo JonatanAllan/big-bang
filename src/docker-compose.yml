@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+  enterprise.template.webapi:
+    image: ${DOCKER_REGISTRY-}enterprisetemplatewebapi
+    build:
+      context: .
+      dockerfile: Enterprise.Template.WebApi/Dockerfile
+
+  enterprise.template.consumer:
+    image: ${DOCKER_REGISTRY-}enterprisetemplateconsumer
+    build:
+      context: .
+      dockerfile: Enterprise.Template.Consumer/Dockerfile
+
+  enterprise.template.worker:
+    image: ${DOCKER_REGISTRY-}enterprisetemplateworker
+    build:
+      context: .
+      dockerfile: Enterprise.Template.Worker/Dockerfile
+
+  messaging-logging-service:
+    image: sdevcontimages.azurecr.io/messaging-logging:latest
+    container_name: messaging-logging
+    labels:
+      name: messaging-logging
+    volumes: 
+      - ./_Deploy/configuration/messaging-logging/appsettings.json:/app/appsettings.json
+
+  rabbitmq:
+    image: sdevcontimages.azurecr.io/rabbitmq:messaging-logging-service
+    container_name: rabbitmq
+    hostname: rabbitmq-messaging-logging-service
+    labels:
+      name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+      - rabbitmq-logs:/var/log/rabbitmq
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - BASE_URI=http://seq:5341
+    volumes:
+      - /datadrive:/data
+    ports:
+      - 5340:80
+      - 5341:5341
+
+volumes:
+  rabbitmq-data:
+  rabbitmq-logs:
+
+
