@@ -1,11 +1,11 @@
 ﻿using Enterprise.Template.Application.Common.Exceptions;
+using Enterprise.Template.Application.IntegrationTests.Core.Builders;
+using Enterprise.Template.Application.IntegrationTests.Core.Tests;
 using Enterprise.Template.Application.Interfaces;
-using Enterprise.Template.Application.Tests.Core.Builders;
-using Enterprise.Template.Application.Tests.Core.Tests;
 using Microsoft.Extensions.DependencyInjection;
-using static Enterprise.Template.Application.Tests.Testing;
+using static Enterprise.Template.Application.IntegrationTests.Testing;
 
-namespace Enterprise.Template.Application.Tests.Board.UseCases
+namespace Enterprise.Template.Application.IntegrationTests.Board
 {
     public class NewBoardTests : BaseTest
     {

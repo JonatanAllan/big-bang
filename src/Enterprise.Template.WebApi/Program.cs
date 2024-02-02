@@ -9,9 +9,6 @@ using Enterprise.Template.IoC.DependencyInjection;
 using Enterprise.Template.IoC.HealthChecks;
 using Enterprise.Template.WebApi.Configuration;
 using Enterprise.Template.WebApi.Infrastructure;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -68,4 +65,7 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+namespace Enterprise.Template.WebApi
+{
+    public partial class Program { }
+}

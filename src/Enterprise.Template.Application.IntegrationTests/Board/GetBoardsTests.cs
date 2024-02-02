@@ -1,24 +1,48 @@
 ﻿using Enterprise.Template.Application.Common.Exceptions;
+using Enterprise.Template.Application.IntegrationTests.Core.Tests;
 using Enterprise.Template.Application.Interfaces;
 using Enterprise.Template.Application.Models.Boards;
-using Enterprise.Template.Application.Tests.Core.Tests;
+using Enterprise.Template.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using static Enterprise.Template.Application.Tests.Testing;
+using static Enterprise.Template.Application.IntegrationTests.Testing;
 
-namespace Enterprise.Template.Application.Tests.Board.UseCases
+namespace Enterprise.Template.Application.IntegrationTests.Board
 {
     public class GetBoardsTests : BaseTest
     {
+        [Test]
+        public async Task ShouldGetBoards()
+        {
+            // Arrange
+            using var scope = ScopeFactory.CreateScope();
+            var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
+            var request = new GetBoardsRequest();
+
+            // Act
+            var response = await boardApplication.GetBoards(request);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                response.Data.Count.Should().BeGreaterThan(0);
+                response.Data.Count.Should().BeLessOrEqualTo(25);
+                response.Total.Should().BeGreaterThan(0);
+            });
+        }
+
         [Test]
         public async Task ShouldGetBoardsWhichNameContains()
         {
             // Arrange
             using var scope = ScopeFactory.CreateScope();
             var boardApplication = scope.ServiceProvider.GetRequiredService<IBoardApplication>();
-            
+            var boardRepository = scope.ServiceProvider.GetRequiredService<IBoardRepository>();
+            var sample = await boardRepository.GetManyAsync(string.Empty, 0, 10);
+
+            var searchName = sample.FirstOrDefault().Name;
             var request = new GetBoardsRequest
             {
-                Name = "Schow"
+                Name = searchName
             };
 
             // Act
@@ -27,7 +51,10 @@ namespace Enterprise.Template.Application.Tests.Board.UseCases
             // Assert
             Assert.Multiple(() =>
             {
-                response.Data.Count.Should().Be(1);
+                response.Data.Count.Should().BeGreaterThan(0);
+                response.Data.Count.Should().BeLessOrEqualTo(25);
+                response.Total.Should().BeGreaterThan(0);
+                response.Data.Should().AllSatisfy(s => s.Name.Contains(searchName));
             });
         }
 

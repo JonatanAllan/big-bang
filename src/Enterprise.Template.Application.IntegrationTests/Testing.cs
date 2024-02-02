@@ -1,7 +1,7 @@
-﻿using Enterprise.Template.Application.Tests.Core.Tests;
+﻿using Enterprise.Template.Application.IntegrationTests.Core.Tests;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Template.Application.Tests
+namespace Enterprise.Template.Application.IntegrationTests
 {
     [SetUpFixture]
     public class Testing

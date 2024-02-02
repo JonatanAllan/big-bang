@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{BB8AC2AA-66F7-4644-B3F7-63D7CCD16946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Template.Application.Tests", "Enterprise.Template.Application.Tests\Enterprise.Template.Application.Tests.csproj", "{454CBA48-7277-4534-BAB4-641952A0F814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Template.Application.IntegrationTests", "Enterprise.Template.Application.IntegrationTests\Enterprise.Template.Application.IntegrationTests.csproj", "{454CBA48-7277-4534-BAB4-641952A0F814}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Template.WebApi", "Enterprise.Template.WebApi\Enterprise.Template.WebApi.csproj", "{980E1D9F-913D-48E5-AD3D-E2056257A05E}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Template.Worker", "Enterprise.Template.Worker\Enterprise.Template.Worker.csproj", "{C3F33C48-97BF-46AF-89C4-E07B97EF4FC6}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{67210A7E-FD9D-4748-B40F-9865C8BDAAEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Template.Application.UnitTests", "Enterprise.Template.Application.UnitTests\Enterprise.Template.Application.UnitTests.csproj", "{10C3A370-7A51-472A-B5BF-1374E763310E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,12 +81,15 @@ Global
 		{67210A7E-FD9D-4748-B40F-9865C8BDAAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67210A7E-FD9D-4748-B40F-9865C8BDAAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67210A7E-FD9D-4748-B40F-9865C8BDAAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C3A370-7A51-472A-B5BF-1374E763310E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C3A370-7A51-472A-B5BF-1374E763310E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C3A370-7A51-472A-B5BF-1374E763310E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C3A370-7A51-472A-B5BF-1374E763310E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{454CBA48-7277-4534-BAB4-641952A0F814} = {BB8AC2AA-66F7-4644-B3F7-63D7CCD16946}
 		{980E1D9F-913D-48E5-AD3D-E2056257A05E} = {79AD0DEF-229D-44C3-A155-1DB4EC111DC1}
 		{7089D35B-38E6-44DB-9EE4-29433D7B2A33} = {53F23247-9D0C-473F-BB63-B5A05AAAD440}
 		{5F2A77E4-3311-4A74-865D-D552C7C209BC} = {144CD7B0-D143-4EC2-94AB-E34E62C88C43}

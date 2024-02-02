@@ -1,6 +1,6 @@
-﻿using static Enterprise.Template.Application.Tests.Testing;
+﻿using static Enterprise.Template.Application.IntegrationTests.Testing;
 
-namespace Enterprise.Template.Application.Tests.Core.Tests
+namespace Enterprise.Template.Application.IntegrationTests.Core.Tests
 {
     [TestFixture]
     public abstract class BaseTest

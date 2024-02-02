@@ -2,7 +2,7 @@
 using Enterprise.PubSub.Enums;
 using Enterprise.PubSub.Interfaces;
 
-namespace Enterprise.Template.Application.Tests.Core.Fakes
+namespace Enterprise.Template.Application.IntegrationTests.Core.Fakes
 {
     public class PublisherServiceFake : IPublisherService
     {

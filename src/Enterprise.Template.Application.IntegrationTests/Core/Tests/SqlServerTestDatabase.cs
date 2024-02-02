@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Template.Application.Tests.Core.Tests
+﻿namespace Enterprise.Template.Application.IntegrationTests.Core.Tests
 {
     public class SqlServerTestDatabase : ITestDatabase
     {

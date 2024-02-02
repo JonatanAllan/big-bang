@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Enterprise.Template.Application.Models.Boards;
 
-namespace Enterprise.Template.Application.Tests.Core.Builders
+namespace Enterprise.Template.Application.IntegrationTests.Core.Builders
 {
     public class BoardBuilder
     {

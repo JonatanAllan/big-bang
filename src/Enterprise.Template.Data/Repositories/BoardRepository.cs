@@ -48,26 +48,37 @@ namespace Enterprise.Template.Data.Repositories
 
         public async Task<IEnumerable<Board>> GetManyAsync(string name, int skip, int take)
         {
-            const string query = "select * from Board where UPPER([Name]) like @Name";
-            var parameters = new List<KeyValuePair<string, object>>();
+            var query = @"select * from Board where 1=1";
+            var parameters = new List<KeyValuePair<string, object>>()
+            {
+                new("Skip", skip),
+                new("Take", take)
+            };
             if (!string.IsNullOrEmpty(name))
+            {
                 parameters.Add(new("Name", "%" + name.ToUpper() + "%"));
+                query += " and UPPER([Name]) like @Name";
+            }
+            query += " order by [Id]";
+            query += " OFFSET @Skip ROWS FETCH NEXT @Take ROWS ONLY";
 
             var result = await _genericRepository.GetAllAsync<Board>(query, System.Data.CommandType.Text, parameters);
 
             if (result.Failed)
                 throw new InvalidOperationException(result.Message);
 
-            return result.Result.Skip(skip).Take(take);
+            return result.Result;
         }
 
-        public async Task<int> CountAsync(string name)
+        public async Task<int> CountAsync(string? name)
         {
-            const string query = "select Count(*) from Board where UPPER([Name]) like @Name";
-            var parameters = new List<KeyValuePair<string, object>>
+            var query = "select Count(*) from Board where 1=1";
+            var parameters = new List<KeyValuePair<string, object>>();
+            if (!string.IsNullOrEmpty(name))
             {
-                new("Name", "%" + name.ToUpper() + "%")
-            };
+                parameters.Add(new("Name", "%" + name.ToUpper() + "%"));
+                query += " and UPPER([Name]) like @Name";
+            }
 
             var result = await _genericRepository.GetSingleAsync<int>(query, System.Data.CommandType.Text, parameters);
 
